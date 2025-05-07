@@ -399,7 +399,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   
   tags = {
-    Name = "${var.project_name}-vpc"
+    Name = "\${var.project_name}-vpc"
   }
 }
 
@@ -410,7 +410,7 @@ resource "aws_subnet" "public" {
   availability_zone = var.availability_zones[count.index]
   
   tags = {
-    Name = "${var.project_name}-public-${count.index + 1}"
+    Name = "\${var.project_name}-public-\${count.index + 1}"
   }
 }
 
@@ -421,13 +421,13 @@ resource "aws_subnet" "private" {
   availability_zone = var.availability_zones[count.index]
   
   tags = {
-    Name = "${var.project_name}-private-${count.index + 1}"
+    Name = "\${var.project_name}-private-\${count.index + 1}"
   }
 }
 
 # Web Server Cluster
 resource "aws_security_group" "web" {
-  name        = "${var.project_name}-web-sg"
+  name        = "\${var.project_name}-web-sg"
   description = "Allow inbound traffic for web servers"
   vpc_id      = aws_vpc.main.id
 
@@ -448,7 +448,7 @@ resource "aws_security_group" "web" {
 }
 
 resource "aws_launch_template" "web" {
-  name_prefix   = "${var.project_name}-web-"
+  name_prefix   = "\${var.project_name}-web-"
   image_id      = var.ami_id
   instance_type = var.instance_type
   
@@ -620,7 +620,7 @@ Continuous Integration and Continuous Deployment (CI/CD) are essential practices
 
 ## Basic Workflow Structure
 
-GitHub Actions workflows are defined in YAML files located in the `.github/workflows` directory of your repository:
+GitHub Actions workflows are defined in YAML files located in the \`.github/workflows\` directory of your repository:
 
 \`\`\`yaml
 # .github/workflows/main.yml
@@ -662,17 +662,17 @@ Test across multiple environments:
 \`\`\`yaml
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: \${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [14.x, 16.x, 18.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js \${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: \${{ matrix.node-version }}
       - run: npm ci
       - run: npm test
 \`\`\`
@@ -694,9 +694,9 @@ steps:
     uses: actions/cache@v2
     with:
       path: ~/.npm
-      key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      key: \${{ runner.os }}-node-\${{ hashFiles('**/package-lock.json') }}
       restore-keys: |
-        ${{ runner.os }}-node-
+        \${{ runner.os }}-node-
   
   - name: Install dependencies
     run: npm ci
@@ -770,8 +770,8 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: \${{ secrets.SONAR_TOKEN }}
   
   security-scan:
     runs-on: ubuntu-latest
@@ -805,11 +805,11 @@ jobs:
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: my-application
           environment_name: staging
-          version_label: ${{ github.sha }}
+          version_label: \${{ github.sha }}
           region: us-east-1
           deployment_package: target/my-application.jar
   
@@ -831,11 +831,11 @@ jobs:
       - name: Deploy to AWS Elastic Beanstalk Production
         uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: my-application
           environment_name: production
-          version_label: ${{ github.sha }}
+          version_label: \${{ github.sha }}
           region: us-east-1
           deployment_package: target/my-application.jar
 \`\`\`
@@ -852,8 +852,8 @@ jobs:
     steps:
       - name: Deploy with sensitive data
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          API_KEY: \${{ secrets.API_KEY }}
+          DATABASE_URL: \${{ secrets.DATABASE_URL }}
         run: ./deploy.sh
 \`\`\`
 
