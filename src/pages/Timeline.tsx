@@ -82,15 +82,18 @@ const Timeline = () => {
         </div>
         
         {/* Timeline */}
-        <div className="relative pl-10 border-l border-border">
+        <div className="relative border-l border-border">
           {sortedItems.map((item, index) => (
             <div 
               key={item.id} 
-              className={`relative mb-10 animate-fade-in`}
+              className="relative mb-10 pl-10 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Fixed positioning of the timeline dot */}
-              <div className="absolute -left-[21px] top-[10px] w-4 h-4 rounded-full bg-primary shadow-md shadow-primary/20 z-10"></div>
+              {/* Timeline dot with properly fixed position */}
+              <div 
+                className="absolute w-4 h-4 rounded-full bg-primary shadow-md shadow-primary/20 z-10" 
+                style={{ left: "-8px", top: "9px" }} 
+              />
               
               <div className="mb-2">
                 <span className="bg-muted text-foreground/80 text-xs px-2 py-1 rounded-full">
