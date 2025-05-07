@@ -113,10 +113,7 @@
   hover:shadow-lg hover:shadow-primary/10;
 }
 
-.timeline-dot {
-  @apply absolute left-0 w-4 h-4 rounded-full bg-primary shadow-md shadow-primary/20 z-10;
-}
-
+/* Removed timeline-dot class as it's now handled directly in the Timeline component */
 .timeline-line {
   @apply absolute left-2 top-0 w-[1px] h-full bg-border z-0;
 }

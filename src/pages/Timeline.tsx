@@ -89,7 +89,8 @@ const Timeline = () => {
               className={`relative mb-10 animate-fade-in`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="timeline-dot"></div>
+              {/* Fixed positioning of the timeline dot */}
+              <div className="absolute -left-[21px] top-[10px] w-4 h-4 rounded-full bg-primary shadow-md shadow-primary/20 z-10"></div>
               
               <div className="mb-2">
                 <span className="bg-muted text-foreground/80 text-xs px-2 py-1 rounded-full">
