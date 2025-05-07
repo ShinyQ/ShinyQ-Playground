@@ -1,3 +1,4 @@
+
 import React from "react";
 
 interface TechItem {
@@ -45,8 +46,8 @@ const TechStack = () => {
   const otherItems = techItems.filter(item => item.type === "other");
   
   return (
-    <section className="py-8 overflow-hidden bg-muted">
-      <div className="container mx-auto px-4 mb-4">
+    <section className="py-6 overflow-hidden bg-muted">
+      <div className="container mx-auto px-4 mb-2">
         <div className="text-sm text-primary font-mono mb-1">
           // tech stack
         </div>
@@ -59,7 +60,7 @@ const TechStack = () => {
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-2">
         {/* Backend Technologies */}
         <div className="relative">
           <div className="mb-1 px-4 md:px-6">
@@ -68,7 +69,7 @@ const TechStack = () => {
             </span>
           </div>
           <div className="flex overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
+            <div className="flex animate-marquee-fast whitespace-nowrap">
               {[...backendItems, ...backendItems].map((tech, index) => (
                 <div 
                   key={`${tech.name}-${index}`} 
@@ -90,7 +91,7 @@ const TechStack = () => {
             </span>
           </div>
           <div className="flex overflow-hidden">
-            <div className="flex animate-marquee-slow whitespace-nowrap">
+            <div className="flex animate-marquee whitespace-nowrap">
               {[...frontendItems, ...frontendItems, ...frontendItems].map((tech, index) => (
                 <div 
                   key={`${tech.name}-${index}`} 
@@ -112,7 +113,7 @@ const TechStack = () => {
             </span>
           </div>
           <div className="flex overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
+            <div className="flex animate-marquee-fast whitespace-nowrap">
               {[...otherItems, ...otherItems].map((tech, index) => (
                 <div 
                   key={`${tech.name}-${index}`} 

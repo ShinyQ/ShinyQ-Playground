@@ -6,88 +6,96 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="pt-20 pb-10 md:py-28">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="order-2 md:order-1">
-            <div className="flex flex-col space-y-4 md:space-y-6">
-              <div className="flex flex-col space-y-1">
-                <span className="text-primary font-mono">/ contact-info</span>
-                <div className="bg-muted rounded-md p-4 border border-border">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-sm md:text-base">
-                      <span className="text-primary">📍</span>
-                      <span>Jakarta, Indonesia</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm md:text-base">
-                      <span className="text-primary">✉️</span>
-                      <a 
-                        href="mailto:kurniadiahmadwijaya@gmail.com"
-                        className="hover:text-primary transition-colors"
-                      >
-                        kurniadiahmadwijaya@gmail.com
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm md:text-base">
-                      <span className="text-primary">🐙</span>
-                      <a 
-                        href="https://github.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        GitHub
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm md:text-base">
-                      <span className="text-primary">🔗</span>
-                      <a 
-                        href="https://linkedin.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        LinkedIn
-                      </a>
-                    </li>
-                  </ul>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div>
+            <div className="space-y-6">
+              <div>
+                <div className="text-xs md:text-sm text-primary font-mono mb-2">
+                  // software engineer
                 </div>
+                <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+                  Building <span className="text-primary">robust solutions</span> for complex problems
+                </h1>
+                <div className="text-lg text-foreground/80">
+                  I'm Kurniadi Ahmad Wijaya, a software engineer specializing in backend and full-stack development 
+                  with 3+ years experience building scalable systems and APIs.
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Button asChild size="lg">
+                  <Link to="/projects">
+                    View My Projects
+                    <ArrowRight size={16} className="ml-2" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/about">About Me</Link>
+                </Button>
               </div>
             </div>
           </div>
           
-          <div className="order-1 md:order-2">
-            <div className="space-y-6">
-              <div>
-                <div className="text-xs md:text-sm text-primary font-mono mb-2">
-                  // hello world
-                </div>
-                <h1 className="text-3xl md:text-5xl font-bold mb-4">
-                  I'm Kurniadi Ahmad Wijaya
-                </h1>
-                <div className="text-lg md:text-xl text-foreground/80">
-                  Software Engineer with 3+ years of experience in backend and full-stack development, 
-                  focusing on microservices, API integrations, and system optimization.
-                </div>
+          <div>
+            <div className="bg-muted rounded-lg border border-border p-6">
+              <div className="flex items-center gap-2 mb-4 text-sm text-primary font-mono">
+                <span className="flex h-3 w-3 rounded-full bg-primary"></span>
+                <span>// get-in-touch</span>
               </div>
               
-              <div className="text-foreground/80">
-                <p>
-                  Experienced in cross-functional collaboration, providing technical guidance, 
-                  and developing solutions that support business objectives.
-                </p>
-              </div>
-              
-              <div className="flex flex-wrap gap-3">
-                <Button asChild>
-                  <Link to="/projects">
-                    View Projects
-                    <ArrowRight size={16} className="ml-1" />
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link to="/about">About Me</Link>
-                </Button>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="text-xl">📍</div>
+                  <div>
+                    <div className="font-medium">Location</div>
+                    <div className="text-sm text-foreground/70">Jakarta, Indonesia</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="text-xl">✉️</div>
+                  <div>
+                    <div className="font-medium">Email</div>
+                    <a 
+                      href="mailto:kurniadiahmadwijaya@gmail.com"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      kurniadiahmadwijaya@gmail.com
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="text-xl">🐙</div>
+                  <div>
+                    <div className="font-medium">GitHub</div>
+                    <a 
+                      href="https://github.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      github.com/kurniadi
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="text-xl">🔗</div>
+                  <div>
+                    <div className="font-medium">LinkedIn</div>
+                    <a 
+                      href="https://linkedin.com"
+                      target="_blank"
+                      rel="noopener noreferrer" 
+                      className="text-sm text-primary hover:underline"
+                    >
+                      linkedin.com/in/kurniadi
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
