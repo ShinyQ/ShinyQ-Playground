@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -12,7 +11,7 @@ interface BlogPostParams {
 }
 
 const BlogPost = () => {
-  const { slug } = useParams<BlogPostParams>();
+  const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState(blogPosts.find(post => post.slug === slug));
   const [relatedPosts, setRelatedPosts] = useState(blogPosts.filter(p => p.slug !== slug).slice(0, 3));
   

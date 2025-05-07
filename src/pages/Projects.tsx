@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { projects } from "@/data/projects";
-import { ArrowRight, GitHub, Link as LinkIcon } from "lucide-react";
+import { ArrowRight, Github, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Projects = () => {
@@ -111,7 +110,7 @@ const Projects = () => {
                   {project.githubUrl && (
                     <Button variant="outline" size="sm" asChild>
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <GitHub size={16} className="mr-1" /> GitHub
+                        <Github size={16} className="mr-1" /> GitHub
                       </a>
                     </Button>
                   )}
