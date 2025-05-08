@@ -1,5 +1,3 @@
-
-import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -13,9 +11,6 @@ const LatestBlogs = () => {
       <div className="container mx-auto px-4">
         <div className="mb-10 flex justify-between items-end">
           <div>
-            <div className="text-sm text-primary font-mono mb-2">
-              // latest writings
-            </div>
             <h2 className="text-2xl md:text-3xl font-bold">
               From My Blog
             </h2>

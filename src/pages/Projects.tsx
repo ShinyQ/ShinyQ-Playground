@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import { projects } from "@/data/projects";
-import { ArrowRight, Github, Link as LinkIcon } from "lucide-react";
+import {  Github, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Projects = () => {

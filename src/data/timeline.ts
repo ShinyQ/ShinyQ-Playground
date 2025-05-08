@@ -5,118 +5,264 @@ export interface TimelineItem {
   endDate: string;
   title: string;
   subtitle: string;
-  description: string[];
+  caption?: string;
+  description?: string[];
   tools?: string[];
   logo?: string;
-  type: 'job' | 'freelance' | 'education' | 'certification' | 'event';
+  type: 'Full-Time' | 'Part-Time' | 'Education' | 'Certification' | 'Competition';
 }
 
 export const timelineItems: TimelineItem[] = [
   {
     id: 1,
-    startDate: "2023-06",
+    startDate: "2024-06",
     endDate: "Present",
-    title: "Tech Solutions Inc.",
-    subtitle: "Senior Backend Developer",
+    title: "PT SMBC Indonesia Tbk (Jenius)",
+    caption: "The largest digital bank in Indonesia that provides a range of financial services like payment, investment, and insurance",
+    subtitle: "Software Engineer",
     description: [
-      "Led the development of a microservices-based e-commerce platform",
-      "Optimized API performance by 40% through Redis caching and query optimization",
-      "Mentored junior developers and conducted code reviews"
+      "Developed microservices with Express.js and Spring Boot, integrating 5+ insurance partners",
+      "Reduced manual processes by 90% by automating policy workflows",
+      "Improved system performance by 30% using Kafka and Redis",
+      "Built custom MFT SFTP service with 99.9% uptime, saving $50K in annual license costs",
+      "Maintained 100% unit test coverage, cutting production issues by 30%",
+      "Built React.js components for insurance dashboards, automating manual tasks"
     ],
-    tools: ["Spring Boot", "PostgreSQL", "Redis", "Docker", "Kubernetes"],
-    type: "job"
+    tools: [
+      "Express.js", "Spring Boot", "Kafka", "Redis", "React.js", 
+      "Docker", "Mocha", "Chai", "Sinon", "PostgreSQL", "AWS", "Jenkins"],
+    logo: "/company/jenius.png",
+    type: "Full-Time"
   },
   {
     id: 2,
-    startDate: "2021-08",
-    endDate: "2023-05",
-    title: "DataFlow Systems",
-    subtitle: "Backend Engineer",
+    startDate: "2023-03",
+    endDate: "2024-06",
+    title: "PT Informasi Teknologi Indonesia",
+    caption: "Provider of messaging and AI-driven solutions in Indonesia, trusted by 500+ top corporations",
+    subtitle: "Full Stack Developer",
     description: [
-      "Developed real-time data processing pipelines handling 10TB+ daily",
-      "Built RESTful APIs for internal and external consumption",
-      "Implemented robust error handling and monitoring systems"
+      "Built multi-tenant SaaS platforms for legal, asset, and task management used by 500+ users",
+      "Led architecture for Asset Management system including PRD, TRD, and ERD documentation",
+      "Developed Golang APIs and integrated them with Next.js frontend to improve user efficiency by 30%",
+      "Cut technical debt by 60% using SonarQube, improving code quality"
     ],
-    tools: ["Go", "Kafka", "MongoDB", "Docker", "AWS"],
-    type: "job"
+    tools: ["Laravel", "MySQL", "Golang", "Next.js", "TailwindCSS", "SonarQube"],
+    logo: "/company/jatis.png",
+    type: "Full-Time"
   },
   {
     id: 3,
-    startDate: "2020-03",
-    endDate: "2021-07",
-    title: "StartupX",
-    subtitle: "Full Stack Developer",
+    startDate: "2022-02",
+    endDate: "2023-02",
+    title: "PT MNC Asia Holding Tbk",
+    caption: "Indonesia’s Leading Investment group, sector across Media, Finance, and Hospitality",
+    subtitle: "Backend Engineer",
     description: [
-      "Built user-facing features for a SaaS platform with 50K+ users",
-      "Implemented authentication and authorization systems",
-      "Collaborated with designers to translate mockups into working interfaces"
+      "Built real-time services with AWS WebSocket and Redis, reducing latency by 15%",
+      "Refactored payment gateway using GraphQL and Lambda, cutting transaction time by 30%",
+      "Optimized MySQL with Gin and Laravel, speeding queries by 20% and cutting errors by 40%",
+      "Migrated homepage backend to GraphQL, boosting load speed by 25%"
     ],
-    tools: ["React", "Node.js", "PostgreSQL", "Redis", "AWS"],
-    type: "job"
+    tools: ["AWS Lambda", "GraphQL", "Gin", "Laravel", "MySQL", "Redis"],
+    type: "Full-Time"
   },
   {
     id: 4,
-    startDate: "2022-05",
-    endDate: "2022-12",
-    title: "Healthcare Analytics Project",
-    subtitle: "Freelance Backend Developer",
+    startDate: "2023-09",
+    endDate: "2023-12",
+    title: "Jublia Pte Ltd (Singapore)",
+    caption: "Empowering Events with Smart Business Matching & Data-Driven Networking Solutions.",
+    subtitle: "Backend Engineer",
     description: [
-      "Developed data analysis pipeline for processing patient records",
-      "Built secure API endpoints compliant with healthcare regulations",
-      "Created automated reporting system for medical staff"
+      "Enhanced search relevance by 40% using Elasticsearch and Collaborative Filtering",
+      "Reduced server response time by 25% through PostgreSQL optimization",
+      "Created AI sentiment analysis service using OpenAI and LangChain with 96% accuracy",
+      "Automated daily sentiment reports with RabbitMQ, increasing feedback analysis speed by 50%",
+      "Removed legacy Flask features, cutting system overhead by 20%"
     ],
-    tools: ["Python", "FastAPI", "PostgreSQL", "Docker"],
-    type: "freelance"
+    tools: ["Elasticsearch", "PostgreSQL", "LangChain", "OpenAI", "RabbitMQ", "Flask"],
+    logo: "/company/jublia.png",
+    type: "Part-Time"
   },
   {
     id: 5,
     startDate: "2019-09",
-    endDate: "2020-02",
-    title: "E-learning Platform Redesign",
-    subtitle: "Freelance Full Stack Developer",
+    endDate: "2022-12",
+    title: "Shumi",
+    caption: "One of the biggest action figures in e-commerce in Indonesia",
+    subtitle: "Backend Engineer",
     description: [
-      "Rebuilt legacy e-learning platform with modern architecture",
-      "Improved page load times by 60%",
-      "Implemented responsive design and accessibility features"
+      "Built REST APIs using Laravel for e-commerce and admin dashboard with 2,000+ daily users",
+      "Integrated Ipaymu and RajaOngkir for payment and logistics, reducing manual tasks by 30%",
+      "Integrated and deployed on DigitalOcean and implemented Sentry for monitoring"
     ],
-    tools: ["Vue.js", "Laravel", "MySQL"],
-    type: "freelance"
+    tools: ["Laravel", "MySQL", "Ipaymu", "RajaOngkir", "DigitalOcean", "Sentry"],
+    logo: "/company/shumi.png",
+    type: "Part-Time"
   },
   {
     id: 6,
-    startDate: "2016-09",
-    endDate: "2020-06",
-    title: "University of Technology",
-    subtitle: "Bachelor of Science in Computer Science",
+    startDate: "2023-05",
+    endDate: "2023-07",
+    title: "BSSN (Indonesia National Cyber and Crypto Agency)",
+    caption: "Indonesia’s National Cyber and Crypto Agency",
+    subtitle: "Backend Engineer",
     description: [
-      "Graduated with honors (GPA: 3.8/4.0)",
-      "Specialized in distributed systems and algorithms",
-      "Completed capstone project: Distributed task scheduler"
+      "Built Electronic Hacking Automation (EHA) for vulnerability scanning and asset management",
+      "Integrated Nessus scanner API with Node.js backend for automated scans",
+      "Deployed on AWS EC2 and implemented job scheduler for 24/7 monitoring, improving coverage by 20%"
     ],
-    type: "education"
+    tools: ["Node.js", "Express.js", "Sequelize", "MySQL", "Nessus", "AWS EC2"],
+    logo: "https://uptimeinstitute.com/images/Logos/Badan_Siber_dan_Sandi_Negara_.jpg",
+    type: "Part-Time"
   },
   {
     id: 7,
-    startDate: "2023-03",
-    endDate: "2023-03",
-    title: "AWS Certified Solutions Architect",
-    subtitle: "Professional Level",
+    startDate: "2024-01",
+    endDate: "Present",
+    title: "Sepuluh Nopember Institute of Technology",
+    subtitle: "Master of Management Technology (MMT)",
     description: [
-      "Demonstrated expertise in designing distributed applications and systems on AWS",
-      "Specialized in high-availability architecture and cost optimization"
+      "Current GPA: 3.60 / 4.00",
+      "Thesis: Application Quality Improvement Recommendation System for Jenius",
+      "Built RAG-LLM system to analyze Jenius app reviews using ISO/IEC 25010:2011 framework. Stored data in PostgreSQL/ChromaDB, classified feedback into quality dimensions, and generated improvement recommendations."
     ],
-    type: "certification"
+    tools: ["Python", "LangChain", "Llama 3.2", "PostgreSQL", "ChromaDB"],
+    logo: "https://www.its.ac.id/wp-content/uploads/2020/07/Lambang-ITS-2-1024x1024.png",
+    type: "Education"
   },
   {
     id: 8,
-    startDate: "2022-02",
-    endDate: "2022-02",
-    title: "TechConf 2022",
-    subtitle: "Speaker",
+    startDate: "2019-08",
+    endDate: "2023-08",
+    title: "Telkom University",
+    subtitle: "Bachelor of Computer Science (BSc)",
     description: [
-      "Presented 'Scaling Microservices in Production' to audience of 300+ developers",
-      "Shared practical lessons from implementing microservices at scale"
+      "Final GPA: 3.88 / 4.00",
+      "Thesis: Sentiboard – Sentiment Analysis Dashboard using IndoBERT",
+      "Created Django dashboard analyzing university feedback via Twitter API. Implemented IndoBERT model for Bahasa Indonesia sentiment analysis. Used incremental development and iterative testing to improve accuracy"
     ],
-    type: "event"
+    tools: ["Python", "Django", "IndoBERT", "Twitter API"],
+    logo: "/company/telyu.png",
+    type: "Education"
+  },
+  {
+    id: 9,
+    startDate: "2022-11",
+    endDate: "2022-11",
+    title: "Closer 8th Hackathon Competition",
+    subtitle: "2nd Place",
+    caption: "Organized by Universitas Telkom",
+    type: "Competition"
+  },
+  {
+    id: 10,
+    startDate: "2022-08",
+    endDate: "2022-08",
+    title: "International Business Plan Competition",
+    subtitle: "2nd Place",
+    caption: "Organized by Politeknik Negeri Bali",
+    type: "Competition"
+  },
+  {
+    id: 11,
+    startDate: "2021-10",
+    endDate: "2021-10",
+    title: "IFEST 2021: Data Analysis Competition",
+    subtitle: "1st Place",
+    caption: "Organized by Universitas Padjadjaran",
+    type: "Competition"
+  },
+  {
+    id: 12,
+    startDate: "2021-07",
+    endDate: "2021-07",
+    title: "ISFEST UMN 2021: Data Competition",
+    subtitle: "1st Place",
+    caption: "Organized by Universitas Multimedia Nusantara",
+    type: "Competition"
+  },
+  {
+    id: 13,
+    startDate: "2021-03",
+    endDate: "2021-03",
+    title: "Foresty CTF Competition 2021",
+    subtitle: "1st Place",
+    caption: "Organized by Forensic and Security Laboratory",
+    type: "Competition"
+  },
+  {
+    id: 14,
+    startDate: "2021-01",
+    endDate: "2021-01",
+    title: "Business Pitching Competition",
+    subtitle: "1st Place",
+    caption: "Organized by BEM KEMA Telkom University",
+    type: "Competition"
+  },
+  {
+    id: 15,
+    startDate: "2020-12",
+    endDate: "2020-12",
+    title: "Scientific Writing Codig 3.0",
+    subtitle: "2nd Place",
+    caption: "Organized by Universitas Mercu Buana",
+    type: "Competition"
+  },
+  {
+    id: 16,
+    startDate: "2020-07",
+    endDate: "2020-07",
+    title: "IT Business Competition 2020",
+    subtitle: "Favorite Winner",
+    caption: "Organized by Amikom Computer Club",
+    type: "Competition"
+  },
+  {
+    id: 17,
+    startDate: "2020-05",
+    endDate: "2020-05",
+    title: "UI/UX Design Competition",
+    subtitle: "1st Place",
+    caption: "Organized by Gunadarma University",
+    type: "Competition"
+  },
+  {
+    id: 18,
+    startDate: "2020-02",
+    endDate: "2020-02",
+    title: "Capture The Flag Competition",
+    subtitle: "3rd Place",
+    caption: "Organized by Forensic and Security Laboratory",
+    type: "Competition"
+  },
+  {
+    id: 19,
+    startDate: "2019-11",
+    endDate: "2019-11",
+    title: "UI/UX Competition",
+    subtitle: "2nd Place",
+    caption: "Organized by Universitas Nasional",
+    type: "Competition"
+  },
+  {
+    id: 20,
+    startDate: "2019-09",
+    endDate: "2019-09",
+    title: "Sigma Idea Competition 2019",
+    subtitle: "2nd Place",
+    caption: "Organized by Universitas Telkom",
+    type: "Competition"
+  },
+  {
+    id: 21,
+    startDate: "2019-09",
+    endDate: "2019-09",
+    title: "Web Development Competition Vision",
+    subtitle: "2nd Place",
+    caption: "Organized by Universitas Sebelas Maret",
+    type: "Competition"
   }
-];
+]
+;

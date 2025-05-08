@@ -21,9 +21,9 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Timeline", path: "/timeline" },
+    { name: "Journey", path: "/journey" },
     { name: "Blog", path: "/blog" },
+    { name: "Projects", path: "/projects" },
   ];
 
   const isActive = (path: string) => {
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-bold text-primary">
-              <span className="text-primary">&gt;</span> Kurniadi<span className="text-primary">_</span>
+              <span className="text-primary">&gt;</span> ShinyQ<span className="text-primary">_</span>
             </Link>
           </div>
 

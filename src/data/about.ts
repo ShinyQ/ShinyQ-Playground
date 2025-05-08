@@ -9,13 +9,13 @@ export interface AboutInfo {
 }
 
 export const aboutInfo: AboutInfo = {
-  intro: "I'm a software engineer with over 3 years of experience specializing in backend and full-stack development. My journey began with a fascination for building systems that solve real problems efficiently. I've since worked across various domains including e-commerce, data processing, and enterprise software, always focusing on creating reliable, maintainable, and scalable solutions.",
+  intro: "I'm a software engineer with 3+ years of building backend and full-stack systems that don’t just work. They scale, they survive, and they matter. I started out obsessed with solving real-world problems using code, and that obsession turned into a career across fintech, e-commerce, SaaS, and AI platforms. What I build isn’t just functional. It’s designed to last, recover, and adapt.",
   
   philosophy: [
-    "Code should be as simple as possible, but no simpler. Complexity should only exist where it truly adds value.",
-    "Systems should be designed for failure recovery rather than perfect operation. Resilience is key.",
-    "Technical debt is sometimes necessary, but should be tracked and addressed methodically.",
-    "Documentation is as important as the code itself. Write code for humans, not just machines."
+    "Keep things simple, but intentional. Simplicity should never come at the cost of power or flexibility.",
+    "Design for failure, not perfection. Systems should recover gracefully, not collapse.",
+    "Technical debt is a trade-off, not an excuse. I document, prioritize, and refactor strategically.",
+    "Code is for humans first. Good documentation and clean architecture go hand in hand."
   ],
   
   workingStyle: [
@@ -29,11 +29,11 @@ export const aboutInfo: AboutInfo = {
     "Backend: Go and Spring Boot for their performance and scalability",
     "Databases: PostgreSQL for relational data, MongoDB for document storage",
     "Infrastructure: Docker, Kubernetes, and Terraform for consistent environments",
-    "DevOps: GitHub Actions for CI/CD pipelines",
+    "DevOps: GitHub Actions for CI/CD pipelines to automate and ship confidently",
     "Monitoring: Prometheus and Grafana for observability"
   ],
   
-  quote: "The best code is no code at all. Every line of code you write is a line you'll have to maintain forever.",
+  quote: "Every line of code you write is a long-term contract. The best solution is the one you’ll proudly maintain.",
   
-  profilePhoto: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&h=800"
+  profilePhoto: "/photo/profile.png"
 };

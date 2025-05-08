@@ -6,9 +6,6 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NotFound from "./NotFound";
 
-interface BlogPostParams {
-  slug: string;
-}
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();

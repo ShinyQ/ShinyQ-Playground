@@ -1,130 +1,49 @@
-
-import React from "react";
-
-interface TechItem {
-  name: string;
-  icon: string;
-  type: "backend" | "frontend" | "other";
-}
-
-const techItems: TechItem[] = [
-  // Backend
-  { name: "Spring Boot", icon: "🍃", type: "backend" },
-  { name: "ExpressJS", icon: "🚂", type: "backend" },
-  { name: "Laravel", icon: "🔺", type: "backend" },
-  { name: "Flask", icon: "🧪", type: "backend" },
-  { name: "FastAPI", icon: "⚡", type: "backend" },
-  { name: "Django", icon: "🦄", type: "backend" },
-  { name: "Gin", icon: "🍸", type: "backend" },
-  { name: "Echo", icon: "📡", type: "backend" },
-  { name: "Huggingface", icon: "🤗", type: "backend" },
-  { name: "Langchain", icon: "⛓️", type: "backend" },
-  
-  // Frontend
-  { name: "React", icon: "⚛️", type: "frontend" },
-  { name: "Vue", icon: "💚", type: "frontend" },
-  { name: "Next.js", icon: "▲", type: "frontend" },
-  { name: "Tailwind", icon: "🌊", type: "frontend" },
-  { name: "Streamlit", icon: "🌊", type: "frontend" },
-  
-  // Others
-  { name: "Docker", icon: "🐳", type: "other" },
-  { name: "Git", icon: "🐙", type: "other" },
-  { name: "PostgreSQL", icon: "🐘", type: "other" },
-  { name: "MySQL", icon: "🐬", type: "other" },
-  { name: "MongoDB", icon: "🍃", type: "other" },
-  { name: "Jenkins", icon: "🤵", type: "other" },
-  { name: "AWS S3", icon: "☁️", type: "other" },
-  { name: "Sentry", icon: "🦅", type: "other" },
-  { name: "Redis", icon: "🟥", type: "other" },
-];
+import { techItems, TechItem } from "@/data/techStack";
 
 const TechStack = () => {
-  // Group tech items by type
-  const backendItems = techItems.filter(item => item.type === "backend");
-  const frontendItems = techItems.filter(item => item.type === "frontend");
-  const otherItems = techItems.filter(item => item.type === "other");
-  
-  return (
-    <section className="py-6 overflow-hidden bg-muted">
-      <div className="container mx-auto px-4 mb-2">
-        <div className="text-sm text-primary font-mono mb-1">
-          // tech stack
+  const grouped = {
+    backend: techItems.filter((item) => item.type === "backend"),
+    frontend: techItems.filter((item) => item.type === "frontend"),
+    other: techItems.filter((item) => item.type === "other"),
+  };
+
+  const Section = ({ items }: { items: TechItem[] }) => (
+    <div className="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+      <div className="w-full relative overflow-hidden">
+        <div className="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+          {[...items, ...items].map((tech, i) => (
+            <div
+              key={`${tech.name}-${i}`}
+              className="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300"
+            >
+              <img
+                src={tech.icon}
+                alt={tech.name}
+                className="w-6 h-6 bg-white rounded-sm p-0.5"
+              />
+
+              <span className="whitespace-nowrap">{tech.name}</span>
+            </div>
+          ))}
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">
+      </div>
+    </div>
+  );
+
+  return (
+    <section className="py-12 bg-muted text-center">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
           Technologies I Work With
         </h2>
-        <p className="text-foreground/70 max-w-2xl text-sm">
-          I've worked with a wide range of technologies across the full stack.
-          Here are some of my favorites that I use regularly.
+        <p className="text-foreground/70 max-w-2xl mx-auto text-sm mb-6">
+          From backend systems to modern frontend frameworks, <br />
+          these are the tools I reach for in building great software.
         </p>
-      </div>
-
-      <div className="space-y-2">
-        {/* Backend Technologies */}
-        <div className="relative">
-          <div className="mb-1 px-4 md:px-6">
-            <span className="inline-block py-0.5 px-2 bg-primary/20 text-primary rounded-full text-xs">
-              Backend
-            </span>
-          </div>
-          <div className="flex overflow-hidden">
-            <div className="flex animate-marquee-fast whitespace-nowrap">
-              {[...backendItems, ...backendItems].map((tech, index) => (
-                <div 
-                  key={`${tech.name}-${index}`} 
-                  className="mx-1 px-2 py-1 bg-card border border-border rounded-md flex items-center gap-1 text-xs"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Frontend Technologies */}
-        <div className="relative">
-          <div className="mb-1 px-4 md:px-6">
-            <span className="inline-block py-0.5 px-2 bg-accent/20 text-accent rounded-full text-xs">
-              Frontend
-            </span>
-          </div>
-          <div className="flex overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
-              {[...frontendItems, ...frontendItems, ...frontendItems].map((tech, index) => (
-                <div 
-                  key={`${tech.name}-${index}`} 
-                  className="mx-1 px-2 py-1 bg-card border border-border rounded-md flex items-center gap-1 text-xs"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Other Technologies */}
-        <div className="relative">
-          <div className="mb-1 px-4 md:px-6">
-            <span className="inline-block py-0.5 px-2 bg-foreground/10 text-foreground/80 rounded-full text-xs">
-              Other
-            </span>
-          </div>
-          <div className="flex overflow-hidden">
-            <div className="flex animate-marquee-fast whitespace-nowrap">
-              {[...otherItems, ...otherItems].map((tech, index) => (
-                <div 
-                  key={`${tech.name}-${index}`} 
-                  className="mx-1 px-2 py-1 bg-card border border-border rounded-md flex items-center gap-1 text-xs"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="space-y-4">
+          <Section items={grouped.backend} />
+          <Section items={grouped.frontend} />
+          <Section items={grouped.other} />
         </div>
       </div>
     </section>
