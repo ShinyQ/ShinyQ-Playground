@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { projects } from "../data/projects";
+import { Github, Link as LinkIcon } from "lucide-react";
+import { Button } from "../components/ui/button";
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  coverImage: string;
+  tags: string[];
+  role: string;
+  techStack: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+}
+---
+
+<Layout>
+  <div class="container mx-auto px-4 py-16 md:py-24">
+    <div class="mb-12">
+      <div class="text-sm text-primary font-mono mb-2">
+        // featured projects
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-6">My Projects</h1>
+      <p class="text-lg text-foreground/80 max-w-3xl">
+        A collection of projects I've built and contributed to. These range from
+        personal explorations to professional work across various domains.
+      </p>
+    </div>
+
+    <!-- Tags filter -->
+    <div class="mb-8 flex flex-wrap gap-2" id="tag-filter">
+      <button
+        data-tag="all"
+        class="px-3 py-1 rounded-full text-sm transition-colors bg-primary text-primary-foreground"
+      >
+        All
+      </button>
+      {
+        Array.from(
+          new Set(projects.flatMap((project: Project) => project.tags))
+        ).map((tag: string) => (
+          <button
+            data-tag={tag}
+            class="px-3 py-1 rounded-full text-sm transition-colors bg-muted text-foreground/70 hover:bg-muted/80"
+          >
+            {tag}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Projects grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      id="projects-grid"
+    >
+      {
+        projects.map((project: Project) => (
+          <div
+            class="project-card flex flex-col h-full"
+            data-tags={project.tags.join(",")}
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src={project.coverImage}
+                alt={project.title}
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex flex-wrap gap-2 mb-3">
+                {project.tags.map((tag: string) => (
+                  <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
+              <p class="text-foreground/70 mb-4 flex-grow">
+                {project.description}
+              </p>
+
+              <div class="mb-4">
+                <div class="text-sm font-medium mb-2">Role:</div>
+                <div class="text-foreground/80">{project.role}</div>
+              </div>
+
+              <div class="mb-5">
+                <div class="text-sm font-medium mb-2">Tech Stack:</div>
+                <div class="flex flex-wrap gap-2">
+                  {project.techStack.map((tech: string) => (
+                    <span class="text-xs px-2 py-1 rounded-md bg-muted/50 text-foreground/70">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="flex gap-3 mt-auto">
+                {project.githubUrl && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center"
+                  >
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center"
+                    >
+                      <Github size={16} className="mr-2" /> GitHub
+                    </a>
+                  </Button>
+                )}
+                {project.liveUrl && (
+                  <Button size="sm" className="flex items-center">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center"
+                    >
+                      <LinkIcon size={16} className="mr-2" /> Live Demo
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="text-center py-20 hidden" id="no-projects">
+      <h3 class="text-xl mb-2">No projects found</h3>
+      <p class="text-foreground/70">
+        No projects match the selected filter. Try selecting a different
+        category.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Client-side interactivity for tag filtering
+  const tagFilter = document.getElementById("tag-filter");
+  const projectsGrid = document.getElementById("projects-grid");
+  const noProjects = document.getElementById("no-projects");
+  const projectCards = projectsGrid?.querySelectorAll(".project-card");
+  const tagButtons = tagFilter?.querySelectorAll("button");
+
+  function filterProjects(selectedTag: string) {
+    if (!projectCards || !noProjects) return;
+
+    let visibleCount = 0;
+
+    projectCards.forEach((card) => {
+      const tags = card.getAttribute("data-tags")?.split(",") || [];
+      const shouldShow = selectedTag === "all" || tags.includes(selectedTag);
+
+      (card as HTMLElement).style.display = shouldShow ? "flex" : "none";
+      if (shouldShow) visibleCount++;
+    });
+
+    noProjects.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  tagButtons?.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedTag = button.getAttribute("data-tag");
+
+      // Update button styles
+      tagButtons.forEach((btn) => {
+        btn.classList.toggle("bg-primary", btn === button);
+        btn.classList.toggle("text-primary-foreground", btn === button);
+        btn.classList.toggle("bg-muted", btn !== button);
+        btn.classList.toggle("text-foreground/70", btn !== button);
+      });
+
+      filterProjects(selectedTag || "all");
+    });
+  });
+</script>
+

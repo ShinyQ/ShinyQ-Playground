@@ -1,0 +1,136 @@
+---
+import { techItems } from "../../data/techStack";
+
+const backend = techItems.filter((item) => item.type === "backend");
+const frontend = techItems.filter((item) => item.type === "frontend");
+const other = techItems.filter((item) => item.type === "other");
+---
+
+<section class="py-12 bg-muted text-center">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+      Technologies I Work With
+    </h2>
+    <p class="text-foreground/70 max-w-2xl mx-auto text-sm mb-6">
+      From scalable backend systems to AI-powered features and clean frontend UIs, <br>
+      Here is the stack I use to build real, production-grade software.
+    </p>
+    <div class="space-y-4">
+      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+        <div class="w-full relative overflow-hidden">
+          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+            {[...backend, ...backend].map((tech, i) =>
+              tech.site ? (
+                <a
+                  href={tech.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
+                  tabindex="0"
+                >
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </a>
+              ) : (
+                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+        <div class="w-full relative overflow-hidden">
+          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+            {[...frontend, ...frontend].map((tech, i) =>
+              tech.site ? (
+                <a
+                  href={tech.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
+                  tabindex="0"
+                >
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </a>
+              ) : (
+                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+        <div class="w-full relative overflow-hidden">
+          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+            {[...other, ...other].map((tech, i) =>
+              tech.site ? (
+                <a
+                  href={tech.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
+                  tabindex="0"
+                >
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </a>
+              ) : (
+                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                  <img
+                    src={tech.icon}
+                    alt={tech.name}
+                    class="w-6 h-6 bg-white rounded-sm p-0.5"
+                  />
+                  <span class="whitespace-nowrap">{tech.name}</span>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - 0.5rem));
+    }
+  }
+
+  .animate-marquee-fast {
+    animation: marquee 15s linear infinite;
+  }
+</style>
+

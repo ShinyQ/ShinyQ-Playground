@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { timelineItems } from '../data/timeline';
+import Timeline from '../components/custom/Timeline';
+
+const FILTERS = [
+    { label: "All", value: null },
+    { label: "Full-Time", value: "Full-Time" },
+    { label: "Part-Time", value: "Part-Time" },
+    { label: "Education", value: "Education" },
+    { label: "Certifications", value: "Certification" },
+    { label: "Competitions", value: "Competition" }
+];
+---
+
+<Layout title="Journey" description="Discover the professional journey and milestones of Kurniadi Ahmad Wijaya, Software Engineer.">
+    <div class="container mx-auto px-4 py-16 md:py-24">
+        <Timeline 
+            client:visible
+            items={timelineItems}
+            filters={FILTERS}
+        />
+    </div>
+</Layout>
+
+<style>
+    .filter-btn {
+        @apply bg-transparent border border-border text-foreground;
+    }
+
+    .filter-btn.active {
+        @apply bg-primary text-primary-foreground border-none;
+    }
+</style>

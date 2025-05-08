@@ -2,12 +2,12 @@ import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./src/components/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./src/layouts/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    "./src/pages/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"
   ],
   prefix: "",
   theme: {
@@ -91,6 +91,18 @@ export default {
         "marquee-fast": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" }
+        },
+        "logo-spin": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" }
+        },
+        "blink": {
+          "0%, 49%": { opacity: "1" },
+          "50%, 100%": { opacity: "0" }
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" }
         }
       },
       animation: {
@@ -99,7 +111,10 @@ export default {
         "fade-in": "fade-in 0.5s ease-out forwards",
         "marquee": "marquee 25s linear infinite",
         "marquee-slow": "marquee-slow 35s linear infinite",
-        "marquee-fast": "marquee-fast 15s linear infinite"
+        "marquee-fast": "marquee-fast 15s linear infinite",
+        "logo-spin": "logo-spin 20s linear infinite",
+        "blink": "blink 1s step-end infinite",
+        "float": "float 6s ease-in-out infinite"
       },
     }
   },

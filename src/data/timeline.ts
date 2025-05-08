@@ -1,4 +1,3 @@
-
 export interface TimelineItem {
   id: number;
   startDate: string;
@@ -9,7 +8,12 @@ export interface TimelineItem {
   description?: string[];
   tools?: string[];
   logo?: string;
-  type: 'Full-Time' | 'Part-Time' | 'Education' | 'Certification' | 'Competition';
+  type:
+    | "Full-Time"
+    | "Part-Time"
+    | "Education"
+    | "Certification"
+    | "Competition";
 }
 
 export const timelineItems: TimelineItem[] = [
@@ -18,7 +22,8 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2024-06",
     endDate: "Present",
     title: "PT SMBC Indonesia Tbk (Jenius)",
-    caption: "The largest digital bank in Indonesia that provides a range of financial services like payment, investment, and insurance",
+    caption:
+      "The largest digital bank in Indonesia that provides a range of financial services like payment, investment, and insurance",
     subtitle: "Software Engineer",
     description: [
       "Developed microservices with Express.js and Spring Boot, integrating 5+ insurance partners",
@@ -26,64 +31,92 @@ export const timelineItems: TimelineItem[] = [
       "Improved system performance by 30% using Kafka and Redis",
       "Built custom MFT SFTP service with 99.9% uptime, saving $50K in annual license costs",
       "Maintained 100% unit test coverage, cutting production issues by 30%",
-      "Built React.js components for insurance dashboards, automating manual tasks"
+      "Built React.js components for insurance dashboards, automating manual tasks",
     ],
     tools: [
-      "Express.js", "Spring Boot", "Kafka", "Redis", "React.js", 
-      "Docker", "Mocha", "Chai", "Sinon", "PostgreSQL", "AWS", "Jenkins"],
+      "Express.js",
+      "Spring Boot",
+      "Kafka",
+      "Redis",
+      "React.js",
+      "Docker",
+      "Mocha",
+      "Chai",
+      "Sinon",
+      "PostgreSQL",
+      "AWS",
+      "Jenkins",
+    ],
     logo: "/company/jenius.png",
-    type: "Full-Time"
+    type: "Full-Time",
   },
   {
     id: 2,
     startDate: "2023-03",
     endDate: "2024-06",
     title: "PT Informasi Teknologi Indonesia",
-    caption: "Provider of messaging and AI-driven solutions in Indonesia, trusted by 500+ top corporations",
+    caption:
+      "Provider of messaging and AI-driven solutions in Indonesia, trusted by 500+ top corporations",
     subtitle: "Full Stack Developer",
     description: [
       "Built multi-tenant SaaS platforms for legal, asset, and task management used by 500+ users",
       "Led architecture for Asset Management system including PRD, TRD, and ERD documentation",
       "Developed Golang APIs and integrated them with Next.js frontend to improve user efficiency by 30%",
-      "Cut technical debt by 60% using SonarQube, improving code quality"
+      "Cut technical debt by 60% using SonarQube, improving code quality",
     ],
-    tools: ["Laravel", "MySQL", "Golang", "Next.js", "TailwindCSS", "SonarQube"],
+    tools: [
+      "Laravel",
+      "MySQL",
+      "Golang",
+      "Next.js",
+      "TailwindCSS",
+      "SonarQube",
+    ],
     logo: "/company/jatis.png",
-    type: "Full-Time"
+    type: "Full-Time",
   },
   {
     id: 3,
     startDate: "2022-02",
     endDate: "2023-02",
     title: "PT MNC Asia Holding Tbk",
-    caption: "Indonesia’s Leading Investment group, sector across Media, Finance, and Hospitality",
+    caption:
+      "Indonesia’s Leading Investment group, sector across Media, Finance, and Hospitality",
     subtitle: "Backend Engineer",
     description: [
       "Built real-time services with AWS WebSocket and Redis, reducing latency by 15%",
       "Refactored payment gateway using GraphQL and Lambda, cutting transaction time by 30%",
       "Optimized MySQL with Gin and Laravel, speeding queries by 20% and cutting errors by 40%",
-      "Migrated homepage backend to GraphQL, boosting load speed by 25%"
+      "Migrated homepage backend to GraphQL, boosting load speed by 25%",
     ],
     tools: ["AWS Lambda", "GraphQL", "Gin", "Laravel", "MySQL", "Redis"],
-    type: "Full-Time"
+    type: "Full-Time",
   },
   {
     id: 4,
     startDate: "2023-09",
     endDate: "2023-12",
     title: "Jublia Pte Ltd (Singapore)",
-    caption: "Empowering Events with Smart Business Matching & Data-Driven Networking Solutions.",
+    caption:
+      "Empowering Events with Smart Business Matching & Data-Driven Networking Solutions.",
     subtitle: "Backend Engineer",
     description: [
       "Enhanced search relevance by 40% using Elasticsearch and Collaborative Filtering",
       "Reduced server response time by 25% through PostgreSQL optimization",
       "Created AI sentiment analysis service using OpenAI and LangChain with 96% accuracy",
       "Automated daily sentiment reports with RabbitMQ, increasing feedback analysis speed by 50%",
-      "Removed legacy Flask features, cutting system overhead by 20%"
+      "Removed legacy Flask features, cutting system overhead by 20%",
     ],
-    tools: ["Elasticsearch", "PostgreSQL", "LangChain", "OpenAI", "RabbitMQ", "Flask"],
+    tools: [
+      "Elasticsearch",
+      "PostgreSQL",
+      "LangChain",
+      "OpenAI",
+      "RabbitMQ",
+      "Flask",
+    ],
     logo: "/company/jublia.png",
-    type: "Part-Time"
+    type: "Part-Time",
   },
   {
     id: 5,
@@ -95,11 +128,18 @@ export const timelineItems: TimelineItem[] = [
     description: [
       "Built REST APIs using Laravel for e-commerce and admin dashboard with 2,000+ daily users",
       "Integrated Ipaymu and RajaOngkir for payment and logistics, reducing manual tasks by 30%",
-      "Integrated and deployed on DigitalOcean and implemented Sentry for monitoring"
+      "Integrated and deployed on DigitalOcean and implemented Sentry for monitoring",
     ],
-    tools: ["Laravel", "MySQL", "Ipaymu", "RajaOngkir", "DigitalOcean", "Sentry"],
+    tools: [
+      "Laravel",
+      "MySQL",
+      "Ipaymu",
+      "RajaOngkir",
+      "DigitalOcean",
+      "Sentry",
+    ],
     logo: "/company/shumi.png",
-    type: "Part-Time"
+    type: "Part-Time",
   },
   {
     id: 6,
@@ -111,11 +151,11 @@ export const timelineItems: TimelineItem[] = [
     description: [
       "Built Electronic Hacking Automation (EHA) for vulnerability scanning and asset management",
       "Integrated Nessus scanner API with Node.js backend for automated scans",
-      "Deployed on AWS EC2 and implemented job scheduler for 24/7 monitoring, improving coverage by 20%"
+      "Deployed on AWS EC2 and implemented job scheduler for 24/7 monitoring, improving coverage by 20%",
     ],
     tools: ["Node.js", "Express.js", "Sequelize", "MySQL", "Nessus", "AWS EC2"],
     logo: "https://uptimeinstitute.com/images/Logos/Badan_Siber_dan_Sandi_Negara_.jpg",
-    type: "Part-Time"
+    type: "Part-Time",
   },
   {
     id: 7,
@@ -126,11 +166,11 @@ export const timelineItems: TimelineItem[] = [
     description: [
       "Current GPA: 3.60 / 4.00",
       "Thesis: Application Quality Improvement Recommendation System for Jenius",
-      "Built RAG-LLM system to analyze Jenius app reviews using ISO/IEC 25010:2011 framework. Stored data in PostgreSQL/ChromaDB, classified feedback into quality dimensions, and generated improvement recommendations."
+      "Built RAG-LLM system to analyze Jenius app reviews using ISO/IEC 25010:2011 framework. Stored data in PostgreSQL/ChromaDB, classified feedback into quality dimensions, and generated improvement recommendations.",
     ],
     tools: ["Python", "LangChain", "Llama 3.2", "PostgreSQL", "ChromaDB"],
     logo: "https://www.its.ac.id/wp-content/uploads/2020/07/Lambang-ITS-2-1024x1024.png",
-    type: "Education"
+    type: "Education",
   },
   {
     id: 8,
@@ -141,11 +181,11 @@ export const timelineItems: TimelineItem[] = [
     description: [
       "Final GPA: 3.88 / 4.00",
       "Thesis: Sentiboard – Sentiment Analysis Dashboard using IndoBERT",
-      "Created Django dashboard analyzing university feedback via Twitter API. Implemented IndoBERT model for Bahasa Indonesia sentiment analysis. Used incremental development and iterative testing to improve accuracy"
+      "Created Django dashboard analyzing university feedback via Twitter API. Implemented IndoBERT model for Bahasa Indonesia sentiment analysis. Used incremental development and iterative testing to improve accuracy",
     ],
     tools: ["Python", "Django", "IndoBERT", "Twitter API"],
     logo: "/company/telyu.png",
-    type: "Education"
+    type: "Education",
   },
   {
     id: 9,
@@ -154,7 +194,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Closer 8th Hackathon Competition",
     subtitle: "2nd Place",
     caption: "Organized by Universitas Telkom",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 10,
@@ -163,7 +203,7 @@ export const timelineItems: TimelineItem[] = [
     title: "International Business Plan Competition",
     subtitle: "2nd Place",
     caption: "Organized by Politeknik Negeri Bali",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 11,
@@ -172,7 +212,7 @@ export const timelineItems: TimelineItem[] = [
     title: "IFEST 2021: Data Analysis Competition",
     subtitle: "1st Place",
     caption: "Organized by Universitas Padjadjaran",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 12,
@@ -181,7 +221,7 @@ export const timelineItems: TimelineItem[] = [
     title: "ISFEST UMN 2021: Data Competition",
     subtitle: "1st Place",
     caption: "Organized by Universitas Multimedia Nusantara",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 13,
@@ -190,7 +230,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Foresty CTF Competition 2021",
     subtitle: "1st Place",
     caption: "Organized by Forensic and Security Laboratory",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 14,
@@ -199,7 +239,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Business Pitching Competition",
     subtitle: "1st Place",
     caption: "Organized by BEM KEMA Telkom University",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 15,
@@ -208,7 +248,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Scientific Writing Codig 3.0",
     subtitle: "2nd Place",
     caption: "Organized by Universitas Mercu Buana",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 16,
@@ -217,7 +257,7 @@ export const timelineItems: TimelineItem[] = [
     title: "IT Business Competition 2020",
     subtitle: "Favorite Winner",
     caption: "Organized by Amikom Computer Club",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 17,
@@ -226,7 +266,7 @@ export const timelineItems: TimelineItem[] = [
     title: "UI/UX Design Competition",
     subtitle: "1st Place",
     caption: "Organized by Gunadarma University",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 18,
@@ -235,7 +275,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Capture The Flag Competition",
     subtitle: "3rd Place",
     caption: "Organized by Forensic and Security Laboratory",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 19,
@@ -244,7 +284,7 @@ export const timelineItems: TimelineItem[] = [
     title: "UI/UX Competition",
     subtitle: "2nd Place",
     caption: "Organized by Universitas Nasional",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 20,
@@ -253,7 +293,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Sigma Idea Competition 2019",
     subtitle: "2nd Place",
     caption: "Organized by Universitas Telkom",
-    type: "Competition"
+    type: "Competition",
   },
   {
     id: 21,
@@ -262,7 +302,6 @@ export const timelineItems: TimelineItem[] = [
     title: "Web Development Competition Vision",
     subtitle: "2nd Place",
     caption: "Organized by Universitas Sebelas Maret",
-    type: "Competition"
-  }
-]
-;
+    type: "Competition",
+  },
+];

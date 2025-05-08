@@ -1,0 +1,116 @@
+---
+import { ArrowRight } from "lucide-react";
+import Typewriter from "../custom/Typewriter";
+---
+
+<section class="py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div>
+        <div class="space-y-6">
+          <div>
+            <h1
+              class="text-2xl md:text-4xl font-semibold leading-snug tracking-tight text-foreground mb-2"
+            >
+              Hello<span class="pl-2 inline-block">👋</span>
+            </h1>
+
+            <h1
+              class="text-2xl md:text-4xl font-semibold leading-snug tracking-tight mb-4"
+            >
+              I'm <span
+                class="bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text"
+                >Kurniadi Ahmad Wijaya</span
+              >
+            </h1>
+
+            <Typewriter
+              text="Software engineer specializing in backend and full-stack development with 3+ years of experience designing scalable systems, clean APIs, and performant architectures."
+              className="text-base md:text-lg text-foreground/80 max-w-2xl"
+              client:load
+            />
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a 
+              href="/projects"
+              class="bg-gradient-to-r from-primary via-primary/90 to-accent/90 text-white font-bold py-2 px-6 rounded-md shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
+              View My Projects
+              <ArrowRight size={16} className="ml-2" />
+            </a>
+            <a 
+              href="/about"
+              class="border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground font-bold py-2 px-6 rounded-md shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
+              About Me
+            </a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="bg-muted rounded-lg border border-border p-6">
+          <div
+            class="flex items-center gap-2 mb-4 text-sm text-primary font-mono"
+          >
+            <span class="flex h-3 w-3 rounded-full bg-primary"></span>
+            <span>// get-in-touch</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="text-xl">📍</div>
+              <div>
+                <div class="font-medium">Location</div>
+                <div class="text-sm text-foreground/70">Jakarta, Indonesia</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="text-xl">✉️</div>
+              <div>
+                <div class="font-medium">Email</div>
+                <a
+                  href="mailto:kurniadiahmadwijaya@gmail.com"
+                  class="text-sm text-primary hover:underline"
+                >
+                  kurniadiahmadwijaya@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="text-xl">🐙</div>
+              <div>
+                <div class="font-medium">GitHub</div>
+                <a
+                  href="https://github.com/shinyq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-primary hover:underline"
+                >
+                  github.com/shinyq
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="text-xl">🔗</div>
+              <div>
+                <div class="font-medium">LinkedIn</div>
+                <a
+                  href="https://www.linkedin.com/in/kurniadiwijaya/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-primary hover:underline"
+                >
+                  linkedin.com/in/kurniadiwijaya
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

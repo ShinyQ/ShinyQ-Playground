@@ -1,5 +1,4 @@
-
-export interface AboutInfo {
+interface AboutInfo {
   intro: string;
   philosophy: string[];
   workingStyle: string[];

@@ -1,0 +1,72 @@
+---
+import "@/styles/global.css";
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import ScatteredIcons from '../components/ScatteredIcons.astro';
+import { cn } from "../lib/utils";
+
+interface Props {
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+const {
+  title = "Kurniadi Ahmad Wijaya",
+  description = "Backend and Full-stack Developer with expertise in microservices, API integrations, and system optimization",
+  className
+} = Astro.props;
+const defaultSite = "Kurniadi Ahmad Wijaya";
+const fullTitle = `${title} - ${defaultSite}`;
+const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Kurniadi Ahmad Wijaya" />
+    <meta name="google-site-verification" content="Cf6K4499XE1AIgP1o-Ij-A1LXl-ItJ2uc803JRlHp_g" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={defaultImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@kurniadiwijaya" />
+    <meta name="twitter:image" content={defaultImage} />
+
+    {/* Preload main Google Fonts for LCP optimization */}
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      as="style"
+      crossorigin="anonymous"
+    />
+    
+    {/* Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" 
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    
+    <title>{fullTitle}</title>
+  </head>
+  <body class="bg-background text-foreground">
+    <div class="min-h-screen flex flex-col">
+      <ScatteredIcons />
+      <Navbar />
+      <main class={cn("flex-grow pt-16", className)}>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <script src="/src/scripts/theme.ts"></script>
+  </body>
+</html> 
