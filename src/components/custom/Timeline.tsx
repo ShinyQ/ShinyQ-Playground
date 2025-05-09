@@ -45,7 +45,16 @@ const TimelineItem = ({ item }: { item: TimelineItem }) => (
             transition={{ type: "spring", stiffness: 300 }}
             className="bg-card rounded-lg p-6 border border-border shadow-lg hover:shadow-2xl hover:border-primary transition-all duration-300"
         >
-            <div className="mb-4 flex justify-between items-start gap-4">
+            <div className="mb-4 flex flex-col md:flex-row justify-between items-start gap-4">
+                {item.logo && (
+                    <div className="w-16 h-16 md:w-12 md:h-12 rounded-lg overflow-hidden bg-white flex items-center justify-center shadow-sm border border-border mb-4 md:mb-0 order-first md:order-last">
+                        <img
+                            src={item.logo}
+                            alt={`${item.title} logo`}
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
+                )}
                 <div>
                     <h3 className="text-xl font-bold">{item.title}</h3>
                     {item.caption && (
@@ -55,15 +64,6 @@ const TimelineItem = ({ item }: { item: TimelineItem }) => (
                     )}
                     <div className="text-primary">{item.subtitle}</div>
                 </div>
-                {item.logo && (
-                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-white flex items-center justify-center shadow-sm border border-border">
-                        <img
-                            src={item.logo}
-                            alt={`${item.title} logo`}
-                            className="w-full h-full object-contain"
-                        />
-                    </div>
-                )}
             </div>
             {item.description && item.description.length > 0 && (
                 <ul className="space-y-2 mb-4">
