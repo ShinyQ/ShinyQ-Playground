@@ -6,41 +6,51 @@ const frontend = techItems.filter((item) => item.type === "frontend");
 const other = techItems.filter((item) => item.type === "other");
 ---
 
-<section class="py-12 bg-muted text-center">
+<section class="py-12 bg-muted text-center min-h-[400px]">
   <div class="container mx-auto px-4">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-      Technologies I Work With
+    <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight min-h-[2.5rem]">
+      My Development Stack
     </h2>
-    <p class="text-foreground/70 max-w-2xl mx-auto text-sm mb-6">
-      From scalable backend systems to AI-powered features and clean frontend UIs, <br>
-      Here is the stack I use to build real, production-grade software.
+    <p class="text-foreground/70 max-w-xl mx-auto text-sm mb-6">
+      Full-stack development with scalable backends, AI integration, and modern frontend architectures
     </p>
     <div class="space-y-4">
       <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
           <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
-            {[...backend, ...backend].map((tech, i) =>
+            {[...backend, ...backend].map((tech) =>
               tech.site ? (
                 <a
                   href={tech.site}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
-                  tabindex="0"
+                  aria-label={`Learn more about ${tech.name} backend technology`}
+                  title={`${tech.name} - Backend Technology`}
                 >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
-                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                <div 
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300"
+                  role="img"
+                  aria-label={`${tech.name} backend technology`}
+                >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
@@ -52,28 +62,39 @@ const other = techItems.filter((item) => item.type === "other");
       <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
           <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
-            {[...frontend, ...frontend].map((tech, i) =>
+            {[...frontend, ...frontend].map((tech) =>
               tech.site ? (
                 <a
                   href={tech.site}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
-                  tabindex="0"
+                  aria-label={`Learn more about ${tech.name} frontend technology`}
+                  title={`${tech.name} - Frontend Technology`}
                 >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
-                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                <div 
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300"
+                  role="img"
+                  aria-label={`${tech.name} frontend technology`}
+                >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
@@ -85,28 +106,39 @@ const other = techItems.filter((item) => item.type === "other");
       <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
           <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
-            {[...other, ...other].map((tech, i) =>
+            {[...other, ...other].map((tech) =>
               tech.site ? (
                 <a
                   href={tech.site}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary"
-                  tabindex="0"
+                  aria-label={`Learn more about ${tech.name} technology`}
+                  title={`${tech.name} - Technology`}
                 >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
-                <div class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300">
+                <div 
+                  class="flex items-center gap-2 bg-background border border-border shadow-sm rounded-md px-4 py-2 text-sm hover:scale-[1.02] transition-transform duration-300"
+                  role="img"
+                  aria-label={`${tech.name} technology`}
+                >
                   <img
                     src={tech.icon}
-                    alt={tech.name}
+                    alt={`${tech.name} technology icon`}
                     class="w-6 h-6 bg-white rounded-sm p-0.5"
+                    width="24"
+                    height="24"
+                    loading="lazy"
                   />
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
