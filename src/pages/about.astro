@@ -1,11 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { aboutInfo } from '../data/about';
-import CVDialog from '../components/custom/CVDialog';
+import Layout from '@/layouts/Layout.astro';
+import { aboutInfo } from '@/data/about';
+import CVDialog from '@/components/custom/CVDialog';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { metadata } from '@/data/metadata';
 ---
 
-<Layout title="About" description="Learn more about Kurniadi Ahmad Wijaya, a software engineer specializing in backend and full-stack development.">
+<Layout 
+    title={metadata.about.title}
+    description={metadata.about.description}
+>
     <div class="container mx-auto px-4 py-16 md:py-24">
         <div class="flex flex-col md:flex-row gap-12">
             {/* Left Section */}

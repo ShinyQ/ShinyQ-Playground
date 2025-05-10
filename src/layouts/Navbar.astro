@@ -1,13 +1,13 @@
 ---
-import ThemeToggle from "../components/custom/ThemeToggle";
+import ThemeToggle from "@/components/custom/ThemeToggle";
 import { Menu } from "lucide-react";
 
 const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Journey", path: "/journey" },
-    { name: "Blog", path: "/blog" },
-    { name: "Projects", path: "/projects" },
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Journey", path: "/journey" },
+  { name: "Blog", path: "/blog" },
+  { name: "Projects", path: "/projects" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -24,7 +24,9 @@ function isActive(path: string) {
     <div class="flex h-16 items-center justify-between">
       <div class="flex items-center">
         <a href="/" class="text-xl font-bold text-primary">
-          <span class="text-primary">&gt;</span> ShinyQ<span class="text-primary">_</span>
+          <span class="text-primary">&gt;</span> ShinyQ<span
+            class="text-primary">_</span
+          >
         </a>
       </div>
 
@@ -61,8 +63,8 @@ function isActive(path: string) {
   </div>
 
   <!-- Mobile Navigation Menu -->
-  <nav 
-    class="md:hidden py-4 px-4 bg-background/95 backdrop-blur-md border-b border-border hidden" 
+  <nav
+    class="md:hidden py-4 px-4 bg-background/95 backdrop-blur-md border-b border-border hidden"
     id="mobile-menu"
     aria-hidden="true"
   >
@@ -106,50 +108,50 @@ function isActive(path: string) {
 
 <script>
   // Handle scroll effect
-  const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById("navbar");
   let isScrolled = false;
 
   function handleScroll() {
     const shouldBeScrolled = window.scrollY > 10;
     if (shouldBeScrolled !== isScrolled) {
       isScrolled = shouldBeScrolled;
-      navbar?.classList.toggle('bg-background/90', isScrolled);
-      navbar?.classList.toggle('backdrop-blur-md', isScrolled);
-      navbar?.classList.toggle('border-b', isScrolled);
-      navbar?.classList.toggle('border-border', isScrolled);
+      navbar?.classList.toggle("bg-background/90", isScrolled);
+      navbar?.classList.toggle("backdrop-blur-md", isScrolled);
+      navbar?.classList.toggle("border-b", isScrolled);
+      navbar?.classList.toggle("border-border", isScrolled);
     }
   }
 
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener("scroll", handleScroll);
   handleScroll(); // Initial check
 
   // Handle mobile menu
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
   let mobileMenuOpen = false;
 
   function toggleMobileMenu() {
     mobileMenuOpen = !mobileMenuOpen;
-    mobileMenu?.classList.toggle('hidden', !mobileMenuOpen);
-    navbar?.classList.toggle('bg-background/90', mobileMenuOpen);
-    navbar?.classList.toggle('backdrop-blur-md', mobileMenuOpen);
-    navbar?.classList.toggle('border-b', mobileMenuOpen);
-    navbar?.classList.toggle('border-border', mobileMenuOpen);
+    mobileMenu?.classList.toggle("hidden", !mobileMenuOpen);
+    navbar?.classList.toggle("bg-background/90", mobileMenuOpen);
+    navbar?.classList.toggle("backdrop-blur-md", mobileMenuOpen);
+    navbar?.classList.toggle("border-b", mobileMenuOpen);
+    navbar?.classList.toggle("border-border", mobileMenuOpen);
 
     // Update ARIA attributes
-    mobileMenuButton?.setAttribute('aria-expanded', mobileMenuOpen.toString());
-    mobileMenu?.setAttribute('aria-hidden', (!mobileMenuOpen).toString());
+    mobileMenuButton?.setAttribute("aria-expanded", mobileMenuOpen.toString());
+    mobileMenu?.setAttribute("aria-hidden", (!mobileMenuOpen).toString());
   }
 
   if (mobileMenuButton) {
-    mobileMenuButton.addEventListener('click', (e) => {
+    mobileMenuButton.addEventListener("click", (e) => {
       e.stopPropagation();
       toggleMobileMenu();
     });
   }
 
   // Close mobile menu when clicking outside
-  document.addEventListener('click', (event) => {
+  document.addEventListener("click", (event) => {
     if (
       mobileMenuOpen &&
       mobileMenuButton &&
@@ -162,15 +164,15 @@ function isActive(path: string) {
   });
 
   // Close mobile menu on window resize if screen becomes larger than mobile breakpoint
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     if (window.innerWidth >= 768 && mobileMenuOpen) {
       toggleMobileMenu();
     }
   });
 
   // Close mobile menu when pressing Escape key
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && mobileMenuOpen) {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileMenuOpen) {
       toggleMobileMenu();
     }
   });

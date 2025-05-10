@@ -1,5 +1,4 @@
 export interface BlogPost {
-  id: number;
   slug: string;
   title: string;
   date: string;
@@ -15,12 +14,12 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    id: 1,
     slug: "getting-started-with-astro",
     title: "Getting Started with Astro",
     date: "2024-03-15",
     coverImage: "/placeholder.svg",
-    excerpt: "Learn how to build lightning-fast websites with Astro's modern static site generation.",
+    excerpt:
+      "Learn how to build lightning-fast websites with Astro's modern static site generation.",
     content: `
       Astro is a modern static site builder that delivers lightning-fast performance with a modern developer experience.
 
@@ -49,15 +48,15 @@ export const blogPosts: BlogPost[] = [
     readingTime: "5 min",
     author: "John Doe",
     category: "Web Development",
-    featured: true
+    featured: true,
   },
   {
-    id: 2,
     slug: "building-modern-ui-with-tailwind",
     title: "Building Modern UI with Tailwind CSS",
     date: "2024-03-10",
     coverImage: "/placeholder.svg",
-    excerpt: "Discover how to create beautiful, responsive interfaces using Tailwind CSS's utility-first approach.",
+    excerpt:
+      "Discover how to create beautiful, responsive interfaces using Tailwind CSS's utility-first approach.",
     content: `
       Tailwind CSS is a utility-first CSS framework that allows you to build custom designs without leaving your HTML.
 
@@ -92,15 +91,15 @@ export const blogPosts: BlogPost[] = [
     readingTime: "4 min",
     author: "Jane Smith",
     category: "CSS",
-    featured: false
+    featured: false,
   },
   {
-    id: 3,
     slug: "react-vs-vue",
     title: "React vs Vue: A Comprehensive Comparison",
     date: "2024-03-05",
     coverImage: "/placeholder.svg",
-    excerpt: "A detailed comparison of two popular JavaScript frameworks for building modern web applications.",
+    excerpt:
+      "A detailed comparison of two popular JavaScript frameworks for building modern web applications.",
     content: `
       Both React and Vue are popular JavaScript frameworks for building user interfaces. Let's compare them in detail.
 
@@ -132,15 +131,15 @@ export const blogPosts: BlogPost[] = [
     readingTime: "6 min",
     author: "Mike Johnson",
     category: "JavaScript",
-    featured: true
+    featured: true,
   },
   {
-    id: 4,
     slug: "typescript-best-practices",
     title: "TypeScript Best Practices for 2024",
     date: "2024-03-01",
     coverImage: "/placeholder.svg",
-    excerpt: "Learn the latest TypeScript best practices and patterns for writing maintainable and type-safe code.",
+    excerpt:
+      "Learn the latest TypeScript best practices and patterns for writing maintainable and type-safe code.",
     content: `
       TypeScript has become an essential tool in modern web development. Let's explore the best practices for writing clean, maintainable TypeScript code.
 
@@ -186,15 +185,15 @@ export const blogPosts: BlogPost[] = [
     readingTime: "7 min",
     author: "Sarah Wilson",
     category: "Programming",
-    featured: true
+    featured: true,
   },
   {
-    id: 5,
     slug: "nextjs-13-features",
     title: "Exploring Next.js 13 Features",
     date: "2024-02-28",
     coverImage: "/placeholder.svg",
-    excerpt: "Discover the powerful new features in Next.js 13 and how to use them in your projects.",
+    excerpt:
+      "Discover the powerful new features in Next.js 13 and how to use them in your projects.",
     content: `
       Next.js 13 introduced several groundbreaking features that revolutionize React development. Let's explore them in detail.
 
@@ -242,10 +241,9 @@ export const blogPosts: BlogPost[] = [
     readingTime: "8 min",
     author: "Alex Brown",
     category: "Web Development",
-    featured: false
+    featured: false,
   },
   {
-    id: 6,
     slug: "docker-for-developers",
     title: "Docker for Web Developers",
     date: "2024-02-25",
@@ -261,63 +259,12 @@ export const blogPosts: BlogPost[] = [
       - Isolated dependencies
       - Scalable applications
 
-      ## Basic Dockerfile
-
-      \`\`\`dockerfile
-      # Use Node.js LTS
-      FROM node:18-alpine
-
-      # Set working directory
-      WORKDIR /app
-
-      # Copy package files
-      COPY package*.json ./
-
-      # Install dependencies
-      RUN npm install
-
-      # Copy source code
       COPY . .
-
-      # Build application
-      RUN npm run build
-
-      # Expose port
-      EXPOSE 3000
-
-      # Start application
-      CMD ["npm", "start"]
-      \`\`\`
-
-      ## Docker Compose
-
-      For multi-container applications:
-
-      \`\`\`yaml
-      version: '3'
-      services:
-        web:
-          build: .
-          ports:
-            - "3000:3000"
-        db:
-          image: postgres:14
-          environment:
-            POSTGRES_PASSWORD: example
-      \`\`\`
-
-      ## Best Practices
-
-      1. Use multi-stage builds
-      2. Optimize layer caching
-      3. Keep images small
-      4. Use .dockerignore
-      5. Follow security guidelines
-    `,
-    tags: ["Docker", "DevOps", "Web Development"],
-    readingTime: "10 min",
-    author: "David Chen",
+      `,
+    tags: ["Docker", "Web Development", "DevOps"],
+    readingTime: "9 min",
+    author: "Emily White",
     category: "DevOps",
-    featured: true
-  }
-];
+    featured: false,
+  },
+]

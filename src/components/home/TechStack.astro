@@ -1,5 +1,6 @@
 ---
-import { techItems } from "../../data/techStack";
+import { techItems } from "@/data/techStack";
+import { Image } from 'astro:assets';
 
 const backend = techItems.filter((item) => item.type === "backend");
 const frontend = techItems.filter((item) => item.type === "frontend");
@@ -28,14 +29,15 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`Learn more about ${tech.name} backend technology`}
                   title={`${tech.name} - Backend Technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
@@ -44,14 +46,15 @@ const other = techItems.filter((item) => item.type === "other");
                   role="img"
                   aria-label={`${tech.name} backend technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
               )
@@ -72,14 +75,15 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`Learn more about ${tech.name} frontend technology`}
                   title={`${tech.name} - Frontend Technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
@@ -88,14 +92,15 @@ const other = techItems.filter((item) => item.type === "other");
                   role="img"
                   aria-label={`${tech.name} frontend technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
               )
@@ -116,14 +121,15 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`Learn more about ${tech.name} technology`}
                   title={`${tech.name} - Technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </a>
               ) : (
@@ -132,14 +138,15 @@ const other = techItems.filter((item) => item.type === "other");
                   role="img"
                   aria-label={`${tech.name} technology`}
                 >
-                  <img
-                    src={tech.icon}
-                    alt={`${tech.name} technology icon`}
-                    class="w-6 h-6 bg-white rounded-sm p-0.5"
-                    width="24"
-                    height="24"
-                    loading="lazy"
-                  />
+                  <div class="w-6 h-6 bg-white rounded-sm p-0.5">
+                    <Image
+                      src={tech.icon}
+                      alt={`${tech.name} technology icon`}
+                      width={24}
+                      height={24}
+                      loading="lazy"
+                    />
+                  </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
                 </div>
               )

@@ -1,15 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { blogPosts } from '../data/blog';
-import { Input } from '../components/ui/input';
+import Layout from '@/layouts/Layout.astro';
+import { blogPosts } from '@/data/blog';
+import { Input } from '@/components/ui/input';
 import { ArrowRight, Search } from 'lucide-react';
+import { metadata } from '@/data/metadata';
 
 const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
 ---
 
 <Layout
-    title="Blog"
-    description="Read articles and insights from Kurniadi Ahmad Wijaya on software engineering, backend, and full-stack development."
+    title={metadata.blog.title}
+    description={metadata.blog.description}
 >
     <div class="container mx-auto px-4 py-16 md:py-24">
         <div class="mb-10">

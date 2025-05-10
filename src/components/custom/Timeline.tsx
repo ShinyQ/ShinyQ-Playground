@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import type { TimelineItem } from '../../data/timeline';
-import { formatDate } from '../../utils/date';
-import { Button } from '../ui/button';
+import { useState, useMemo } from 'react';
+import type { TimelineItem } from '@/data/timeline';
+import { formatDate } from '@/utils/date';
+import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface TimelineProps {

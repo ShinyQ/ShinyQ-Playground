@@ -89,6 +89,7 @@ export const timelineItems: TimelineItem[] = [
       "Optimized MySQL with Gin and Laravel, speeding queries by 20% and cutting errors by 40%",
       "Migrated homepage backend to GraphQL, boosting load speed by 25%",
     ],
+    logo: "/company/mnc.png",
     tools: ["AWS Lambda", "GraphQL", "Gin", "Laravel", "MySQL", "Redis"],
     type: "Full-Time",
   },

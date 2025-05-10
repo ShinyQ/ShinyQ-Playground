@@ -1,14 +1,14 @@
 'use client';
 
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
     DialogTitle,
+    DialogTrigger,
     DialogDescription
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
 export default function CVDialog() {

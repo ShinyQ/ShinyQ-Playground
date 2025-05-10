@@ -1,4 +1,5 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -25,9 +26,13 @@
         "./src/*"
       ]
     },
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "types": ["astro/client"]
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
