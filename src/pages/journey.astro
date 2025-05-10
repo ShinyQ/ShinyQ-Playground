@@ -1,11 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { timelineItems } from '@/data/timeline';
-import Timeline from '@/components/custom/Timeline';
+import Timeline from '@/components/journey/Timeline';
 import { metadata } from '@/data/metadata';
 
 const FILTERS = [
-    { label: "All", value: null },
     { label: "Full-Time", value: "Full-Time" },
     { label: "Part-Time", value: "Part-Time" },
     { label: "Education", value: "Education" },

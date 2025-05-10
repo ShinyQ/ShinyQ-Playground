@@ -36,5 +36,5 @@ export const aboutInfo: AboutInfo = {
   quote:
     "Every line of code you write is a long-term contract. The best solution is the one you’ll proudly maintain.",
 
-  profilePhoto: "/photo/profile.png",
+  profilePhoto: "photo/profile.png",
 };

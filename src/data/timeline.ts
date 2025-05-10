@@ -16,6 +16,11 @@ export interface TimelineItem {
     | "Competition";
 }
 
+export interface TimelineProps {
+  items: TimelineItem[];
+  filters: { label: string; value: string | null }[];
+}
+
 export const timelineItems: TimelineItem[] = [
   {
     id: 1,
@@ -54,7 +59,7 @@ export const timelineItems: TimelineItem[] = [
     id: 2,
     startDate: "2023-03",
     endDate: "2024-06",
-    title: "PT Informasi Teknologi Indonesia",
+    title: "PT Informasi Teknologi Indonesia (Jatis)",
     caption:
       "Provider of messaging and AI-driven solutions in Indonesia, trusted by 500+ top corporations",
     subtitle: "Full Stack Developer",
@@ -81,7 +86,7 @@ export const timelineItems: TimelineItem[] = [
     endDate: "2023-02",
     title: "PT MNC Asia Holding Tbk",
     caption:
-      "Indonesia’s Leading Investment group, sector across Media, Finance, and Hospitality",
+      "Indonesia's Leading Investment group, sector across Media, Finance, and Hospitality",
     subtitle: "Backend Engineer",
     description: [
       "Built real-time services with AWS WebSocket and Redis, reducing latency by 15%",
@@ -147,7 +152,7 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2023-05",
     endDate: "2023-07",
     title: "BSSN (Indonesia National Cyber and Crypto Agency)",
-    caption: "Indonesia’s National Cyber and Crypto Agency",
+    caption: "Indonesia's National Cyber and Crypto Agency",
     subtitle: "Backend Engineer",
     description: [
       "Built Electronic Hacking Automation (EHA) for vulnerability scanning and asset management",

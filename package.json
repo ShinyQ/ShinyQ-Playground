@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.7",
+    "@aws-sdk/client-s3": "^3.806.0",
+    "@aws-sdk/s3-request-presigner": "^3.806.0",
     "@octokit/core": "^6.1.5",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-slot": "^1.2.2",

@@ -8,7 +8,7 @@ export interface Project {
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
-  gallery?: string[];
+  gallery?: string;
 }
 
 export const projects: Project[] = [
@@ -16,8 +16,8 @@ export const projects: Project[] = [
     id: "shumishop",
     title: "Shumi Shop",
     description:
-      "A specialized e-commerce platform for anime action figures and collectibles, providing users with a seamless shopping experience. Built with React, Laravel and MySQL, the platform includes Google OAuth login, transactional email system, RajaOngkir API for real-time shipping rates, and integrated Ipaymu Payment Gateway for secure transactions. Deployed on DigitalOcean with AWS S3 for asset storage and Sentry for error monitoring.",
-    coverImage: "/projects/cover/shumi.png",
+      "An e-commerce platform for anime figures and collectibles, featuring pre-order, late pre-order, ready stock, and voucher support. Delivers a smooth shopping experience with secure checkout, real-time shipping, and email updates.",
+    coverImage: "projects/shumi/cover.png",
     tags: ["E-commerce", "Web Development", "Anime Collectibles"],
     role: "Backend Engineer",
     techStack: [
@@ -32,39 +32,25 @@ export const projects: Project[] = [
       "DigitalOcean",
     ],
     liveUrl: "https://shumi.shop/",
-    gallery: [
-      "/projects/cover/shumi.png",
-      "/projects/shumi/shumi1.png",
-      "/projects/shumi/shumi2.png",
-      "/projects/shumi/shumi3.png",
-      "/projects/shumi/shumi4.png",
-      "/projects/shumi/shumi5.png",
-    ],
+    gallery: "projects/shumi",
   },
   {
     id: "shumi-dashboard",
     title: "Shumi Admin Dashboard",
     description:
-      "An admin dashboard system for Shumi Shop, architected for high-throughput e-commerce ops. Includes multi-state order workflows, partial payment reconciliation, voucher/banner CRUD, asset taxonomy (manufacturer, series, character), and real-time ledger sync. Features secure role-based access, dynamic query filtering, manual receipt parsing, and observability via Sentry. Engineered for scale and operational resilience.",
-    coverImage: "/projects/cover/shumidashboard.png",
-    tags: ["Admin Panel", "E-commerce Backend", "Order Management"],
+      "A backend system built for high-volume e-commerce operations, supporting order workflows, partial payments, voucher and banner management, and product categorization. Includes real-time ledger updates, secure role-based access, advanced filtering, manual receipt checks, and error tracking. Designed for scale and reliability.",
+    coverImage: "projects/shumidashboard/cover.png",
+    tags: ["Dashboard", "E-commerce Backend", "Order Management"],
     role: "Backend Engineer",
     techStack: ["Laravel", "PHP", "MySQL", "AWS S3", "Sentry", "DigitalOcean"],
-    gallery: [
-      "/projects/cover/shumidashboard.png",
-      "/projects/shumidashboard/shumidashboard1.png",
-      "/projects/shumidashboard/shumidashboard2.png",
-      "/projects/shumidashboard/shumidashboard3.png",
-      "/projects/shumidashboard/shumidashboard4.png",
-      
-    ],
+    gallery: "projects/shumidashboard",
   },
   {
     id: "stock-portfolio-optimizer",
-    title: "S&P 500 Portfolio Optimizer (SLSQP)",
-    description: "A financial optimization web app built with Streamlit, leveraging SLSQP to maximize monthly stock portfolio returns under custom constraints. Supports asset diversification, sector-based allocation caps, and historical Yahoo Finance data analysis. Features include dynamic optimization, interactive UI, and investor-specific risk profiling for data-driven allocation decisions.",
-    coverImage: "/projects/cover/stockoptimization.png",
-    tags: ["Portfolio Optimization", "Streamlit App", "SLSQP", "Finance"],
+    title: "S&P500 Portfolio Optimizer (SLSQP)",
+    description: "A web app for maximizing monthly stock returns under custom constraints. Supports portfolio diversification, sector limits, and historical data analysis. Includes interactive optimization, risk-based profiling, and real-time insights for smarter investment decisions.",
+    coverImage: "projects/stockoptimization/cover.png",
+    tags: ["Portfolio Optimization", "SLSQP", "Finance"],
     role: "Full Stack Developer",
     techStack: [
       "Python",
@@ -77,12 +63,25 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/ShinyQ/Streamlit_Stock-Allocation-Optimization-SLSQP",
     liveUrl: "https://stock-optimization-slsqp-group2.streamlit.app",
-    gallery: [
-      "/projects/cover/stockoptimization.png",
-      "/projects/stockoptimization/stockopt1.png",
-      "/projects/stockoptimization/stockopt2.png",
-      "/projects/stockoptimization/stockopt3.png",
-      
-    ]
+    gallery: "projects/stockoptimization",
+  },
+  {
+    id: "shinqy-portfolio",
+    title: "Personal Website",
+    description: "A personal website for showcasing projects and sharing insights. Includes a blog, project portfolio, and a dashboard for managing content.",
+    coverImage: "projects/shinyqweb/cover.png",
+    tags: ["Personal Website", "Blog", "Portfolio"],
+    role: "Full Stack Developer",
+    techStack: [
+      "Astro",
+      "React",
+      "TailwindCSS",
+      "TypeScript",
+      "Shadcn UI",
+      "Cloudflare R2",
+      "Cloudflare Pages",
+      "Redis"
+    ],
+    githubUrl: "https://github.com/ShinyQ/shinyq-playground",
   },
 ];

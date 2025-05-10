@@ -1,135 +1,154 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { blogPosts } from '@/data/blog';
-import { Input } from '@/components/ui/input';
-import { ArrowRight, Search } from 'lucide-react';
-import { metadata } from '@/data/metadata';
+import Layout from "@/layouts/Layout.astro";
+import { blogPosts } from "@/data/blog";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Search } from "lucide-react";
+import { metadata } from "@/data/metadata";
+import { getSignedFileUrl } from "@/lib/r2";
 
-const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
+const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
+
+// Pre-generate image URLs
+const postsWithUrls = await Promise.all(
+  blogPosts.map(async (post) => ({
+    ...post,
+    coverImage: await getSignedFileUrl(post.coverImage),
+  }))
+);
 ---
 
-<Layout
-    title={metadata.blog.title}
-    description={metadata.blog.description}
->
-    <div class="container mx-auto px-4 py-16 md:py-24">
-        <div class="mb-10">
-            <div class="text-sm text-primary font-mono mb-2">
-                // thoughts and insights
-            </div>
-            <h1 class="text-3xl md:text-4xl font-bold mb-6">
-                Blog
-            </h1>
-            <p class="text-lg text-foreground/80 max-w-3xl">
-                Articles, tutorials, and thoughts on software development, architecture,
-                and engineering practices.
-            </p>
-        </div>
-        <div class="mb-10 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
-            {/* Search */}
-            <div class="relative max-w-md w-full">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-foreground/60 h-4 w-4" />
-                <Input
-                    type="text"
-                    id="search-input"
-                    placeholder="Search articles..."
-                    className="pl-8"
-                />
-            </div>
-            {/* Tags filter */}
-            <div class="flex flex-wrap gap-2" id="tags-container">
-                <button
-                    data-tag="all"
-                    class="px-3 py-1 rounded-full text-sm transition-colors bg-primary text-primary-foreground"
-                >
-                    All
-                </button>
-                {allTags.map(tag => (
-                    <button
-                        data-tag={tag}
-                        class="px-3 py-1 rounded-full text-sm transition-colors bg-muted text-foreground/70 hover:bg-muted/80"
-                    >
-                        {tag}
-                    </button>
-                ))}
-            </div>
-        </div>
-        {/* Blog posts grid */}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-container">
-            {blogPosts.map(post => (
-                <a href={`/blog/${post.slug}`} class="block">
-                    <div class="bg-card rounded-lg overflow-hidden border border-border h-full 
-                        hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
-                        <div class="h-48 overflow-hidden">
-                            <img
-                                src={post.coverImage}
-                                alt={post.title}
-                                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                            />
-                        </div>
-                        <div class="p-6">
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                {post.tags.map(tag => (
-                                    <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                            <h3 class="text-lg font-semibold mb-2">{post.title}</h3>
-                            <p class="text-foreground/70 text-sm mb-3">
-                                {post.excerpt}
-                            </p>
-                            <div class="flex justify-between items-center">
-                                <div class="text-xs text-foreground/60">
-                                    {new Date(post.date).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    })}
-                                </div>
-                                <div class="flex items-center text-primary text-sm font-medium">
-                                    Read more <ArrowRight size={14} className="ml-1" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            ))}
-        </div>
-        <div id="no-posts-message" class="hidden text-center py-20">
-            <h3 class="text-xl mb-2">No posts found</h3>
-            <p class="text-foreground/70">
-                Try adjusting your search or filter to find what you're looking for.
-            </p>
-        </div>
+<Layout title={metadata.blog.title} description={metadata.blog.description}>
+  <div class="container mx-auto px-4 py-16 md:py-24">
+    <div class="mb-10">
+      <div class="text-sm text-primary font-mono mb-2">
+        // thoughts and insights
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-6">Blog</h1>
+      <p class="text-lg text-foreground/80 max-w-3xl">
+        Articles, tutorials, and thoughts on software development, architecture,
+        and engineering practices.
+      </p>
     </div>
+    <div
+      class="mb-10 flex flex-col md:flex-row gap-4 md:items-center md:justify-between"
+    >
+      {/* Search */}
+      <div class="relative max-w-md w-full">
+        <Search
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 text-foreground/60 h-4 w-4"
+        />
+        <Input
+          type="text"
+          id="search-input"
+          placeholder="Search articles..."
+          className="pl-8"
+        />
+      </div>
+      {/* Tags filter */}
+      <div class="flex flex-wrap gap-2" id="tags-container">
+        <button
+          data-tag="all"
+          class="px-3 py-1 rounded-full text-sm transition-colors bg-primary text-primary-foreground"
+        >
+          All
+        </button>
+        {
+          allTags.map((tag) => (
+            <button
+              data-tag={tag}
+              class="px-3 py-1 rounded-full text-sm transition-colors bg-muted text-foreground/70 hover:bg-muted/80"
+            >
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+    {/* Blog posts grid */}
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      id="posts-container"
+    >
+      {
+        postsWithUrls.map((post) => (
+          <a href={`/blog/${post.slug}`} class="block">
+            <div
+              class="bg-card rounded-lg overflow-hidden border border-border h-full 
+                        hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div class="h-48 overflow-hidden">
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {post.tags.map((tag) => (
+                    <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 class="text-lg font-semibold mb-2">{post.title}</h3>
+                <p class="text-foreground/70 text-sm mb-3">{post.excerpt}</p>
+                <div class="flex justify-between items-center">
+                  <div class="text-xs text-foreground/60">
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </div>
+                  <div class="flex items-center text-primary text-sm font-medium">
+                    Read more <ArrowRight size={14} className="ml-1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <div id="no-posts-message" class="hidden text-center py-20">
+      <h3 class="text-xl mb-2">No posts found</h3>
+      <p class="text-foreground/70">
+        Try adjusting your search or filter to find what you're looking for.
+      </p>
+    </div>
+  </div>
 </Layout>
 
-<script define:vars={{ blogPosts }}>
-    const searchInput = document.getElementById('search-input');
-    const tagsContainer = document.getElementById('tags-container');
-    const postsContainer = document.getElementById('posts-container');
-    const noPostsMessage = document.getElementById('no-posts-message');
-    let selectedTag = null;
+<script define:vars={{ postsWithUrls }}>
+  const searchInput = document.getElementById("search-input");
+  const tagsContainer = document.getElementById("tags-container");
+  const postsContainer = document.getElementById("posts-container");
+  const noPostsMessage = document.getElementById("no-posts-message");
+  let selectedTag = null;
 
-    // Function to filter posts
-    function filterPosts() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredPosts = blogPosts.filter(post => {
-            const matchesSearch = searchTerm === "" ||
-                post.title.toLowerCase().includes(searchTerm) ||
-                post.excerpt.toLowerCase().includes(searchTerm);
-            const matchesTag = selectedTag === null || post.tags.includes(selectedTag);
-            return matchesSearch && matchesTag;
-        });
+  // Function to filter posts
+  function filterPosts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredPosts = postsWithUrls.filter((post) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        post.title.toLowerCase().includes(searchTerm) ||
+        post.excerpt.toLowerCase().includes(searchTerm);
+      const matchesTag =
+        selectedTag === null || post.tags.includes(selectedTag);
+      return matchesSearch && matchesTag;
+    });
 
-        // Update UI
-        if (filteredPosts.length === 0) {
-            postsContainer.innerHTML = '';
-            noPostsMessage.classList.remove('hidden');
-        } else {
-            noPostsMessage.classList.add('hidden');
-            postsContainer.innerHTML = filteredPosts.map(post => `
+    // Update UI
+    if (filteredPosts.length === 0) {
+      postsContainer.innerHTML = "";
+      noPostsMessage.classList.remove("hidden");
+    } else {
+      noPostsMessage.classList.add("hidden");
+      postsContainer.innerHTML = filteredPosts
+        .map(
+          (post) => `
                 <a href="/blog/${post.slug}" class="block">
                     <div class="bg-card rounded-lg overflow-hidden border border-border h-full 
                         hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
@@ -142,11 +161,15 @@ const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
                         </div>
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                ${post.tags.map(tag => `
+                                ${post.tags
+                                  .map(
+                                    (tag) => `
                                     <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
                                         ${tag}
                                     </span>
-                                `).join('')}
+                                `
+                                  )
+                                  .join("")}
                             </div>
                             <h3 class="text-lg font-semibold mb-2">${post.title}</h3>
                             <p class="text-foreground/70 text-sm mb-3">
@@ -154,11 +177,14 @@ const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
                             </p>
                             <div class="flex justify-between items-center">
                                 <div class="text-xs text-foreground/60">
-                                    ${new Date(post.date).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    })}
+                                    ${new Date(post.date).toLocaleDateString(
+                                      "en-US",
+                                      {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      }
+                                    )}
                                 </div>
                                 <div class="flex items-center text-primary text-sm font-medium">
                                     Read more <svg class="ml-1 w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -167,28 +193,31 @@ const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
                         </div>
                     </div>
                 </a>
-            `).join('');
-        }
+            `
+        )
+        .join("");
     }
+  }
 
-    // Add event listeners
-    searchInput.addEventListener('input', filterPosts);
-    tagsContainer.addEventListener('click', (e) => {
-        const button = e.target.closest('button');
-        if (!button) return;
+  // Add event listeners
+  searchInput.addEventListener("input", filterPosts);
+  tagsContainer.addEventListener("click", (e) => {
+    const button = e.target.closest("button");
+    if (!button) return;
 
-        // Update selected tag
-        const tag = button.dataset.tag;
-        selectedTag = tag === 'all' ? null : tag;
+    // Update selected tag
+    const tag = button.dataset.tag;
+    selectedTag = tag === "all" ? null : tag;
 
-        // Update button styles
-        tagsContainer.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('bg-primary', 'text-primary-foreground');
-            btn.classList.add('bg-muted', 'text-foreground/70');
-        });
-        button.classList.remove('bg-muted', 'text-foreground/70');
-        button.classList.add('bg-primary', 'text-primary-foreground');
-
-        filterPosts();
+    // Update button styles
+    tagsContainer.querySelectorAll("button").forEach((btn) => {
+      btn.classList.remove("bg-primary", "text-primary-foreground");
+      btn.classList.add("bg-muted", "text-foreground/70");
     });
-</script> 
+    button.classList.remove("bg-muted", "text-foreground/70");
+    button.classList.add("bg-primary", "text-primary-foreground");
+
+    filterPosts();
+  });
+</script>
+
