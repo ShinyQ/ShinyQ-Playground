@@ -17,7 +17,8 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': path.resolve('./src')
+        '@': path.resolve('./src'),
+        'react-dom/server': 'react-dom/server.edge'
       }
     },
   },
