@@ -4,6 +4,7 @@ import Navbar from "./Navbar.astro";
 import Footer from "./Footer.astro";
 import ScatteredIcons from "@/layouts/ScatteredIcons.astro";
 import { cn } from "@/lib/utils";
+import { trackUniqueVisitor } from "@/lib/uniqueVisitor";
 
 interface Props {
   title?: string;
@@ -16,6 +17,12 @@ const {
   description = "Backend and Full-stack Developer with expertise in microservices, API integrations, and system optimization",
   className,
 } = Astro.props;
+
+const ip = Astro.request.headers.get('x-forwarded-for') || Astro.request.headers.get('x-real-ip') || 'unknown';
+const userAgent = Astro.request.headers.get('user-agent') || 'unknown';
+
+await trackUniqueVisitor(ip, userAgent);
+
 const defaultSite = "Kurniadi Ahmad Wijaya";
 const fullTitle = `${title} - ${defaultSite}`;
 const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
@@ -41,6 +48,15 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@kurniadiwijaya" />
     <meta name="twitter:image" content={defaultImage} />
+
+    {/* Google Analytics */}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0WDF3MR3D"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T0WDF3MR3D');
+    </script>
 
     {/* Preload main Google Fonts for LCP optimization */}
     <link
