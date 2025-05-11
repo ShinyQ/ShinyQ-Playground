@@ -10,6 +10,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
+  output: 'server',
   site: "https://kurniadi.pages.dev",
   vite: {
     resolve: {
