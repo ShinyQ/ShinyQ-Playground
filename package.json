@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "clean": "rm -rf .astro dist node_modules && npm install"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.5.2",

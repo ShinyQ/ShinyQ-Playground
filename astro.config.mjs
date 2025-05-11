@@ -11,7 +11,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  output: 'server',
+  output: 'hybrid',
   adapter: cloudflare(),
   site: "https://kurniadi.pages.dev",
   vite: {
