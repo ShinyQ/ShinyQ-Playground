@@ -5,8 +5,6 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 
-export const prerender = true;
-
 export async function getStaticPaths() {
   return blogPosts.map(post => ({
     params: { slug: post.slug },
