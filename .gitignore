@@ -13,6 +13,8 @@ dist-ssr
 *.local
 .astro
 .env
+.wrangler
+worker-configuration.d.ts
 
 # Editor directories and files
 .vscode/*

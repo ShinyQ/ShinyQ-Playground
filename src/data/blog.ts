@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     slug: "getting-started-with-astro",
     title: "Getting Started with Astro",
     date: "2024-03-15",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt:
       "Learn how to build lightning-fast websites with Astro's modern static site generation.",
     content: `
@@ -54,7 +54,7 @@ export const blogPosts: BlogPost[] = [
     slug: "building-modern-ui-with-tailwind",
     title: "Building Modern UI with Tailwind CSS",
     date: "2024-03-10",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt:
       "Discover how to create beautiful, responsive interfaces using Tailwind CSS's utility-first approach.",
     content: `
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     slug: "react-vs-vue",
     title: "React vs Vue: A Comprehensive Comparison",
     date: "2024-03-05",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt:
       "A detailed comparison of two popular JavaScript frameworks for building modern web applications.",
     content: `
@@ -137,7 +137,7 @@ export const blogPosts: BlogPost[] = [
     slug: "typescript-best-practices",
     title: "TypeScript Best Practices for 2024",
     date: "2024-03-01",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt:
       "Learn the latest TypeScript best practices and patterns for writing maintainable and type-safe code.",
     content: `
@@ -191,7 +191,7 @@ export const blogPosts: BlogPost[] = [
     slug: "nextjs-13-features",
     title: "Exploring Next.js 13 Features",
     date: "2024-02-28",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt:
       "Discover the powerful new features in Next.js 13 and how to use them in your projects.",
     content: `
@@ -247,7 +247,7 @@ export const blogPosts: BlogPost[] = [
     slug: "docker-for-developers",
     title: "Docker for Web Developers",
     date: "2024-02-25",
-    coverImage: "/placeholder.svg",
+    coverImage: "placeholder.svg",
     excerpt: "A practical guide to using Docker in web development workflows.",
     content: `
       Docker has revolutionized how we develop and deploy applications. Let's learn how to use Docker effectively in web development.
