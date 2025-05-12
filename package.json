@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.7",
+    "@astrojs/sitemap": "^3.4.0",
     "@aws-sdk/client-s3": "^3.806.0",
     "@aws-sdk/s3-request-presigner": "^3.806.0",
     "@octokit/core": "^6.1.5",
@@ -22,6 +23,7 @@
     "astro": "^5.7.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cssnano": "^7.0.7",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.11.0",
     "ioredis": "^5.6.1",
