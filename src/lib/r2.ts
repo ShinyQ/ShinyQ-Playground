@@ -38,7 +38,7 @@ export const getSignedFileUrl = async (key: string): Promise<string> => {
 
     try {
         return await getSignedUrl(r2, command, {
-            expiresIn: 3600,
+            expiresIn: 604800,
             signableHeaders: new Set(["host"]),
         });
     } catch (err) {
