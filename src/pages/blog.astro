@@ -1,18 +1,25 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { blogPosts } from "@/data/blog";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search } from "lucide-react";
 import { metadata } from "@/data/metadata";
 import { getSignedFileUrl } from "@/lib/r2";
+import { getCollection } from 'astro:content';
 
-const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
+const blogPosts = await getCollection('blog');
+const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.data.tags)));
 
-// Pre-generate image URLs
 const postsWithUrls = await Promise.all(
   blogPosts.map(async (post) => ({
-    ...post,
-    coverImage: await getSignedFileUrl(post.coverImage),
+    slug: post.slug,
+    title: post.data.title,
+    date: post.data.date,
+    coverImage: post.data.coverImage ? await getSignedFileUrl(post.data.coverImage) : '',
+    excerpt: post.data.excerpt,
+    tags: post.data.tags,
+    readingTime: post.data.readingTime,
+    category: post.data.category,
+    featured: post.data.featured,
   }))
 );
 ---

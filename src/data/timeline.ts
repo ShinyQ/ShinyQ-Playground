@@ -160,7 +160,7 @@ export const timelineItems: TimelineItem[] = [
       "Deployed on AWS EC2 and implemented job scheduler for 24/7 monitoring, improving coverage by 20%",
     ],
     tools: ["Node.js", "Express.js", "Sequelize", "MySQL", "Nessus", "AWS EC2"],
-    logo: "https://uptimeinstitute.com/images/Logos/Badan_Siber_dan_Sandi_Negara_.jpg",
+    logo: "/company/bssn.png",
     type: "Part-Time",
   },
   {
@@ -175,7 +175,7 @@ export const timelineItems: TimelineItem[] = [
       "Built RAG-LLM system to analyze Jenius app reviews using ISO/IEC 25010:2011 framework. Stored data in PostgreSQL/ChromaDB, classified feedback into quality dimensions, and generated improvement recommendations.",
     ],
     tools: ["Python", "LangChain", "Llama 3.2", "PostgreSQL", "ChromaDB"],
-    logo: "https://www.its.ac.id/wp-content/uploads/2020/07/Lambang-ITS-2-1024x1024.png",
+    logo: "/company/its.png",
     type: "Education",
   },
   {
@@ -325,7 +325,7 @@ export const timelineItems: TimelineItem[] = [
   {
     id: 23,
     startDate: "2021-05-31",
-    endDate: "2026-07-16",
+    endDate: "2021-07-16",
     title: "Digitalent Machine Learning Certification",
     subtitle: "AI & Data",
     caption: "IBM & Kominfo",

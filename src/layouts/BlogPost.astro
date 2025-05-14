@@ -1,0 +1,107 @@
+---
+interface Props {
+  frontmatter: {
+    coverImage: string;
+    title: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { coverImage, title } = frontmatter;
+---
+
+<article class="blog-content">
+  {coverImage && (
+    <div class="my-12 rounded-xl overflow-hidden">
+      <img
+        src={coverImage}
+        alt={`Cover image for ${title}`}
+        class="blog-cover-image"
+      />
+    </div>
+  )}
+
+  <div class="prose prose-lg max-w-none dark:prose-invert">
+    <slot />
+  </div>
+</article>
+
+<style>
+  /* Content styling */
+  :global(.prose) {
+    @apply text-foreground/90;
+  }
+  
+  :global(.prose a) {
+    @apply text-primary hover:text-primary/80 transition-colors;
+  }
+  
+  :global(.prose code) {
+    @apply text-accent bg-muted px-1.5 py-0.5 rounded text-sm border border-border;
+  }
+  
+  :global(.prose pre) {
+    @apply bg-muted border border-border p-4 rounded-lg my-6;
+  }
+  
+  :global(.prose pre code) {
+    @apply bg-transparent border-0 p-0;
+  }
+  
+  :global(.astro-code) {
+    @apply !bg-muted !text-foreground border border-border rounded-lg p-4;
+  }
+
+  /* Light mode specific styles */
+  :global(.astro-code span) {
+    @apply !text-foreground;
+  }
+  
+  /* Syntax highlighting colors that work in both modes */
+  :global([data-theme="light"] .astro-code) {
+    @apply !bg-gray-50;
+  }
+  
+  :global([data-theme="light"] .astro-code span) {
+    @apply !text-gray-800;
+  }
+
+  :global([data-theme="dark"] .astro-code) {
+    @apply !bg-gray-900;
+  }
+
+  :global([data-theme="dark"] .astro-code span) {
+    @apply !text-gray-100;
+  }
+  
+  :global(.prose blockquote) {
+    @apply border-l-4 border-primary pl-4 italic my-6;
+  }
+  
+  :global(.prose h2),
+  :global(.prose h3),
+  :global(.prose h4) {
+    @apply text-foreground font-bold scroll-mt-20;
+  }
+  
+  :global(.prose img) {
+    @apply rounded-lg shadow-lg my-8;
+  }
+  
+  :global(.prose ul),
+  :global(.prose ol) {
+    @apply my-6 pl-6;
+  }
+  
+  :global(.prose li) {
+    @apply mb-2;
+  }
+  
+  :global(.prose p) {
+    @apply leading-relaxed mb-6;
+  }
+  
+  .github-dark {
+    background-color: hsl(var(--card)) !important;
+  }
+</style>

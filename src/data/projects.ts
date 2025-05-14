@@ -88,7 +88,7 @@ export const projects: Project[] = [
   {
     id: "sentiboard",
     title: "Sentiboard",
-    description: "A sentiment analysis dashboard designed for universities, built to manage and analyze social media data from Twitter. Features include automated data crawling, sentiment data management, real-time sentiment statistics, and sentiment prediction using a fine-tuned IndoBERT model. Enables decision-makers to monitor public perception efficiently with NLP-driven insights and an intuitive interface. Designed for extensibility and data-driven strategy.",
+    description: "A sentiment analysis dashboard for universities to monitor Twitter data. Features automated crawling, sentiment data management, and prediction using a fine-tuned IndoBERT model. Provides NLP-driven insights through an intuitive interface, helping decision-makers understand public perception. Built for extensibility, historical analysis, and data-driven strategies in academic decision-making.",
     coverImage: "projects/sentiboard/cover.png",
     tags: ["Web Development", "Dashboard", "NLP", "Sentiment Analysis", "Data Visualization"],
     role: "Full Stack Developer",
@@ -110,11 +110,12 @@ export const projects: Project[] = [
     title: "Helby: Baby Development Monitoring Apps",
     description: "A mobile-first UI/UX design case study for a baby development tracking app, focused on guiding new parents through critical growth milestones. Features include intuitive input flows for daily tracking, personalized growth insights, reminder systems, and milestone visualization based on WHO standards. Designed with empathy-driven UX principles, prioritizing clarity, accessibility, and emotional support for first-time users.",
     coverImage: "projects/helby/cover.png",
-    tags: ["UI/UX Design"],
+    tags: ["UI/UX Design", "UX Research"],
     role: "UI/UX Designer",
     techStack: [
       "User Centered Design",
-      "Figma"
+      "Heuristic Evaluation",
+      "Figma",
     ],
     docUrl: "https://kurniadiahmadwijaya.medium.com/studi-kasus-rancangan-ui-ux-aplikasi-pemantau-perkembangan-bayi-369886df3652"
   }

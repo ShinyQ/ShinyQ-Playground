@@ -1,8 +1,22 @@
 ---
 import { ArrowRight } from "lucide-react";
-import { blogPosts } from "@/data/blog";
+import { getCollection } from 'astro:content';
+import { getSignedFileUrl } from "@/lib/r2";
 
-const latestPosts = blogPosts.slice(0, 3);
+const blogPosts = await getCollection('blog');
+const latestPosts = await Promise.all(
+  blogPosts
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+    .slice(0, 3)
+    .map(async (post) => ({
+      slug: post.slug,
+      title: post.data.title,
+      date: post.data.date,
+      coverImage: post.data.coverImage ? await getSignedFileUrl(post.data.coverImage) : '',
+      excerpt: post.data.excerpt,
+      tags: post.data.tags,
+    }))
+);
 ---
 
 <section class="py-16">

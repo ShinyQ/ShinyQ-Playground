@@ -21,7 +21,7 @@ export const tagCategories: TagCategory[] = [
     {
         id: "uiux",
         name: "UI/UX Design",
-        subcategories: ["Figma", "Adobe XD", "Sketch", "Prototyping", "User Testing"]
+        subcategories: ["Figma", "Adobe XD", "Sketch", "Prototyping", "User Testing", "UX Research"]
     },
     {
         id: "devops",
