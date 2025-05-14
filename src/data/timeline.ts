@@ -310,4 +310,52 @@ export const timelineItems: TimelineItem[] = [
     caption: "Organized by Universitas Sebelas Maret",
     type: "Competition",
   },
+  {
+    id: 22,
+    startDate: "2024-01-03",
+    endDate: "2026-01-03",
+    title: "TOEFL ITP",
+    subtitle: "English Test",
+    caption: "IES Foundation",
+    description: [
+      "Score: 547",
+    ],
+    type: "Certification",
+  },
+  {
+    id: 23,
+    startDate: "2021-05-31",
+    endDate: "2026-07-16",
+    title: "Digitalent Machine Learning Certification",
+    subtitle: "AI & Data",
+    caption: "IBM & Kominfo",
+    type: "Certification",
+    description: [
+      "Completed 160 hours (7 weeks) of comprehensive online training in machine learning as part of the Digital Talent Scholarship by Kominfo and IBM",
+      "Covered foundational and intermediate topics including supervised/unsupervised learning, neural networks, and time series analysis",
+      "Developed machine learning projects using Python, including NLP with TensorFlow, image classification with CNN, and time series forecasting",
+      "Learned data preprocessing, feature engineering, model training, evaluation, and deployment practices",
+      "Gained practical skills in data visualization using Matplotlib, Seaborn, and Google Sheets",
+      "Received Certificates from Kominfo, IBM SkillsBuild, and Dicoding for successful course completion and project submissions"
+    ],
+    tools: ["Python", "scikit-learn", "TensorFlow", "Pytorch", "Keras", "Matplotlib", "Seaborn", "Google Colab"]
+  },
+  {
+    id: 23,
+    startDate: "2021-11-01",
+    endDate: "2021-12-10",
+    title: "Microcredential Certification: Associate Data Scientist",
+    subtitle: "AI & Data",
+    caption: "Indonesia AI Research Consortium (IARC) & APTIKOM",
+    type: "Certification",
+    description: [
+      "Completed a national-scale microcredential certification program in Artificial Intelligence and Data Science organized by Indonesia AI Research Consortium (IARC) and APTIKOM",
+      "Learned fundamentals of AI including data science, data engineering, data governance, and machine learning",
+      "Studied mathematical foundations including probability, regression, PCA, clustering, Bayesian inference, linear algebra, and calculus",
+      "Practiced data analysis, big data processing, supervised and unsupervised learning, reinforcement learning, NLP, and computer vision",
+      "Engaged in hands-on projects and synchronous training sessions with industry and academic experts",
+      "Participated in blended learning: self-paced modules, online discussions, and real-time video conferences"
+    ],
+    tools:["Python", "Jupyter Notebook", "NumPy", "Pandas", "scikit-learn", "Matplotlib", "Seaborn", "Yolo v3"]
+  },
 ];
