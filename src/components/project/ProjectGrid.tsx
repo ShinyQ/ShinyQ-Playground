@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import GalleryModal from "@/components/project/GalleryModal";
-import { Github, Link as LinkIcon, FileText } from "lucide-react";
-import { tagCategories, getSubcategories } from "@/data/tagCategories";
+import { GitBranch, Link as LinkIcon, FileText } from "lucide-react";
+import { getSubcategories } from "@/data/tagCategories";
 
 interface GalleryImage {
   src: string;
@@ -158,7 +158,7 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({ projects }) => {
                     rel="noopener noreferrer"
                     className="flex items-center"
                   >
-                    <Github size={16} className="mr-2" /> GitHub
+                    <GitBranch size={16} className="mr-2" /> GitHub
                   </a>
                 </Button>
               )}

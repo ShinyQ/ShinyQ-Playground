@@ -3,22 +3,37 @@ import react from "@astrojs/react";
 import path from "path";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-
+import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  integrations: [
-    react(), 
-    sitemap(), 
-    tailwindcss(), 
-    mdx()
-  ],
+  integrations: [react(), sitemap(), tailwindcss(), mdx()],
   site: "https://kurniadi.pages.dev",
   vite: {
     resolve: {
-      alias: {
-        '@': path.resolve('./src')
-      }
-    }
+      alias: import.meta.env.PROD && {
+        "@": path.resolve("./src"),
+        "react-dom/server": "react-dom/server.edge",
+      },
+    },
+    ssr: {
+      external: [
+        "crypto",
+        "path",
+        "os",
+        "events",
+        "stream",
+        "util",
+        "net",
+        "tls",
+        "url",
+        "dns",
+        "assert",
+        "buffer",
+        "string_decoder",
+      ],
+    },
   },
+  output: "server",
+  adapter: cloudflare(),
 });

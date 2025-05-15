@@ -3,14 +3,17 @@ import { getPublicRepositories } from "@/lib/api/github";
 
 let repos: any[] = [];
 let error: string | null = null;
+
 try {
-  repos = (await getPublicRepositories()) as any[];
+  const reposPromise = Promise.race([
+    getPublicRepositories(),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout fetching repositories')), 5000))
+  ]);
+  
+  repos = (await reposPromise) as any[];
 } catch (e: unknown) {
-  if (e && typeof e === "object" && "message" in e) {
-    error = (e as any).message || "Failed to load repositories.";
-  } else {
-    error = "Failed to load repositories.";
-  }
+  console.error('Error fetching repositories:', e);
+  error = "Failed to load repositories. Please try again later.";
 }
 
 function formatDate(dateStr: string) {

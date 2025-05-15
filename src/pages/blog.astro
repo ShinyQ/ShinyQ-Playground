@@ -1,4 +1,5 @@
 ---
+
 import Layout from "@/layouts/Layout.astro";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Search } from "lucide-react";
@@ -127,7 +128,7 @@ const postsWithUrls = await Promise.all(
   </div>
 </Layout>
 
-<script define:vars={{ postsWithUrls }}>
+<script define:vars={{ postsWithUrls }} is:inline>
   const searchInput = document.getElementById("search-input");
   const tagsContainer = document.getElementById("tags-container");
   const postsContainer = document.getElementById("posts-container");

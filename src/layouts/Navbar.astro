@@ -68,24 +68,22 @@ function isActive(path: string) {
     id="mobile-menu"
     aria-hidden="true"
   >
-    <ul class="space-y-2">
-      {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.path}
-              class={`block py-2 px-4 rounded-md ${
-                isActive(item.path)
-                  ? "bg-primary/10 text-primary"
-                  : "text-foreground/80 hover:text-foreground"
-              }`}
-              onclick="document.getElementById('mobile-menu-button').click()"
-            >
-              {item.name}
-            </a>
-          </li>
-        ))
-      }
+    <ul class="space-y-2" style="display: none;">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.path}
+            class={`block py-2 px-4 rounded-md ${
+              isActive(item.path)
+                ? "bg-primary/10 text-primary"
+                : "text-foreground/80 hover:text-foreground"
+            }`}
+            onclick="document.getElementById('mobile-menu-button').click()"
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
     </ul>
   </nav>
 </header>

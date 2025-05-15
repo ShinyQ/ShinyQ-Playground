@@ -70,7 +70,6 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ images = [], open, startInd
         className="absolute inset-0 flex flex-col items-center justify-center p-4"
         onClick={e => e.stopPropagation()}
         onKeyDown={e => e.stopPropagation()}
-        alt="presentation"
         tabIndex={-1}
       >
         {images.length > 1 && (

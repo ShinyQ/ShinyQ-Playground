@@ -3,20 +3,61 @@ import { ArrowRight } from "lucide-react";
 import { getCollection } from 'astro:content';
 import { getSignedFileUrl } from "@/lib/r2";
 
-const blogPosts = await getCollection('blog');
-const latestPosts = await Promise.all(
-  blogPosts
+interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  coverImage: string;
+  excerpt: string;
+  tags: string[];
+}
+
+let latestPosts: BlogPost[] = [];
+
+try {
+  const blogPosts = await getCollection('blog');
+  const sortedPosts = blogPosts
     .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-    .slice(0, 3)
-    .map(async (post) => ({
-      slug: post.slug,
-      title: post.data.title,
-      date: post.data.date,
-      coverImage: post.data.coverImage ? await getSignedFileUrl(post.data.coverImage) : '',
-      excerpt: post.data.excerpt,
-      tags: post.data.tags,
-    }))
-);
+    .slice(0, 3);
+
+  latestPosts = await Promise.allSettled(
+    sortedPosts.map(async (post) => {
+      try {
+        const coverImage = post.data.coverImage 
+          ? await Promise.race([
+              getSignedFileUrl(post.data.coverImage),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+            ])
+          : '';
+
+        return {
+          slug: post.slug,
+          title: post.data.title,
+          date: post.data.date,
+          coverImage,
+          excerpt: post.data.excerpt,
+          tags: post.data.tags,
+        } as BlogPost;
+      } catch (error) {
+        console.error(`Error processing post ${post.slug}:`, error);
+        return {
+          slug: post.slug,
+          title: post.data.title,
+          date: post.data.date,
+          coverImage: '',
+          excerpt: post.data.excerpt,
+          tags: post.data.tags,
+        } as BlogPost;
+      }
+    })
+  ).then(results => 
+    results
+      .filter(result => result.status === 'fulfilled')
+      .map(result => result.value)
+  );
+} catch (error) {
+  console.error('Failed to fetch blog posts:', error);
+}
 ---
 
 <section class="py-16">
@@ -35,43 +76,49 @@ const latestPosts = await Promise.all(
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {latestPosts.map((post) => (
-        <a href={`/blog/${post.slug}`} class="block h-full">
-          <div
-            class="bg-card rounded-lg overflow-hidden border border-border h-full 
-            hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
-          >
-            <div class="h-48 overflow-hidden relative">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                width="400"
-                height="192"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-6 flex flex-col h-[calc(100%-12rem)]">
-              <div class="flex flex-wrap gap-2 mb-3">
-                {post.tags.map((tag) => (
-                  <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
-                    {tag}
-                  </span>
-                ))}
+      {latestPosts.length > 0 ? (
+        latestPosts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="block h-full">
+            <div
+              class="bg-card rounded-lg overflow-hidden border border-border h-full 
+              hover:border-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div class="h-48 overflow-hidden relative">
+                <img
+                  src={post.coverImage || '/fallback/blog-placeholder.png'}
+                  alt={post.title}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  width="400"
+                  height="192"
+                  loading="lazy"
+                />
               </div>
-              <h3 class="text-lg font-semibold mb-2 line-clamp-2">{post.title}</h3>
-              <p class="text-foreground/70 text-sm mb-3 line-clamp-3">{post.excerpt}</p>
-              <div class="text-xs text-foreground/60 mt-auto">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
+              <div class="p-6 flex flex-col h-[calc(100%-12rem)]">
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {post.tags.map((tag) => (
+                    <span class="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 class="text-lg font-semibold mb-2 line-clamp-2">{post.title}</h3>
+                <p class="text-foreground/70 text-sm mb-3 line-clamp-3">{post.excerpt}</p>
+                <div class="text-xs text-foreground/60 mt-auto">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      ))}
+          </a>
+        ))
+      ) : (
+        <div class="col-span-full text-center py-8 text-foreground/70">
+          No blog posts available at the moment.
+        </div>
+      )}
     </div>
   </div>
 </section>
