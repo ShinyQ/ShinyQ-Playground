@@ -11,6 +11,9 @@
     "lint:fix": "eslint . --fix",
     "preview:cloudflare": "astro check && astro build && wrangler pages dev ./dist"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^12.5.3",
