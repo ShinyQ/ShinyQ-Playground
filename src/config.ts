@@ -10,7 +10,6 @@ function required(name: string): string {
 export const config = {
     GITHUB_API_TOKEN: required('GITHUB_API_TOKEN'),
     REDIS_URL: required('REDIS_URL'),
-    CACHE_TOP_REPO_TTL: parseInt(required('CACHE_TOP_REPO_TTL'), 10),
     CLOUDFLARE: {
         ACCOUNT_ID: required('CLOUDFLARE_R2_ACCOUNT_ID'),
         ACCESS_KEY_ID: required('CLOUDFLARE_R2_ACCESS_KEY_ID'),
