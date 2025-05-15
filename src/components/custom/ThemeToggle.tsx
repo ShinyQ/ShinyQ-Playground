@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 
 export default function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
-    const [isLight, setIsLight] = useState(false);
+    const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
         setMounted(true);
         const saved = localStorage.getItem("theme");
         if (saved) {
-            setIsLight(saved === "light");
+            setIsDark(saved === "dark");
         } else {
-            setIsLight(window.matchMedia("(prefers-color-scheme: light)").matches);
+            setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
         }
     }, []);
 
@@ -22,9 +22,16 @@ export default function ThemeToggle() {
         if (!mounted) return;
         
         const root = document.documentElement;
-        root.classList.toggle("light", isLight);
-        localStorage.setItem("theme", isLight ? "light" : "dark");
-    }, [isLight, mounted]);
+        if (isDark) {
+            root.classList.add("dark");
+        } else {
+            root.classList.remove("dark");
+        }
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        
+        // Dispatch theme change event
+        document.dispatchEvent(new Event("themeChange"));
+    }, [isDark, mounted]);
 
     if (!mounted) {
         return (
@@ -45,12 +52,12 @@ export default function ThemeToggle() {
             size="icon"
             className="rounded-full hover:bg-muted/50 p-2 w-9 h-9"
             aria-label="Toggle theme"
-            onClick={() => setIsLight(prev => !prev)}
+            onClick={() => setIsDark(prev => !prev)}
         >
-            {isLight ? (
-                <Moon size={20} className="text-slate-900" />
+            {isDark ? (
+                <Sun size={20} className="text-yellow-400 dark:text-yellow-300" />
             ) : (
-                <Sun size={20} className="text-yellow-400" />
+                <Moon size={20} className="text-slate-700 dark:text-slate-200" />
             )}
         </Button>
     );

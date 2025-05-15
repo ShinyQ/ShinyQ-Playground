@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import CVDialog from "@/components/about/CVDialog";
 import { aboutInfo } from "@/data/about";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { GitBranch, Briefcase, Mail } from "lucide-react";
 import { metadata } from "@/data/metadata";
 import { getSignedFileUrl } from "@/lib/r2";
 
@@ -55,7 +55,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                       class="group hover:scale-110 transition-transform duration-200"
                     >
                       <div class="bg-background border border-border rounded-md p-2 group-hover:bg-primary/10">
-                        <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+                        <GitBranch className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
                       </div>
                     </a>
 
@@ -67,7 +67,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                       class="group hover:scale-110 transition-transform duration-200"
                     >
                       <div class="bg-background border border-border rounded-md p-2 group-hover:bg-primary/10">
-                        <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+                        <Briefcase className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
                       </div>
                     </a>
 
@@ -196,7 +196,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                     class="group hover:scale-110 transition-transform duration-200"
                   >
                     <div class="bg-background border border-border rounded-md p-2 group-hover:bg-primary/10">
-                      <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+                      <GitBranch className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
                     </div>
                   </a>
 
@@ -208,7 +208,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                     class="group hover:scale-110 transition-transform duration-200"
                   >
                     <div class="bg-background border border-border rounded-md p-2 group-hover:bg-primary/10">
-                      <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+                      <Briefcase className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
                     </div>
                   </a>
 

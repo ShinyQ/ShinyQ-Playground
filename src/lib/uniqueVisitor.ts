@@ -1,31 +1,48 @@
-import redis from './redis';
-import { createHash } from 'crypto';
+import { createHash } from "crypto";
+import { KV } from "./kv";
+import { config } from "@/config";
 
-const UNIQUE_VISITORS_KEY = 'site:unique_visitors';
-const VISITOR_EXPIRY = 60 * 5; 
+const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID;
+const kv = new KV();
 
 export async function trackUniqueVisitor(ip: string, userAgent: string): Promise<boolean> {
-    const visitorId = createHash('md5')
-        .update(`${ip}-${userAgent}`)
-        .digest('hex');
-    
-    const isNewVisitor = await redis.set(
-        `${UNIQUE_VISITORS_KEY}:${visitorId}`,
-        '1',
-        'EX',
-        VISITOR_EXPIRY,
-        'NX'
-    );
+    try {
+        const visitorId = createHash("md5")
+            .update(`${ip}-${userAgent}`)
+            .digest("hex");
 
-    if (isNewVisitor) {
-        await redis.incr(UNIQUE_VISITORS_KEY);
+        const uniqueKey = `${config.VISITOR.UNIQUE_KEY}:${visitorId}`;
+
+        // Check if already exists
+        const exists = await kv.getKey(NAMESPACE_ID, uniqueKey);
+        if (exists) { return false; }
+
+        // Use a single transaction to update both the visitor and count
+        const current = await kv.getKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY);
+        const count = current ? parseInt(current as string, 10) || 0 : 0;
+        
+        // Batch the operations
+        await Promise.all([
+            kv.putKey(NAMESPACE_ID, uniqueKey, "1", config.VISITOR.EXPIRY),
+            kv.putKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY, (count + 1).toString())
+        ]);
+
         return true;
+    } catch (error) {
+        console.error("[Visitor Tracking] Error:", error);
+        return false;
     }
-
-    return false;
 }
 
 export async function getUniqueVisitorCount(): Promise<number> {
-    const count = await redis.get(UNIQUE_VISITORS_KEY);
-    return count ? parseInt(count) : 0;
-} 
+    try {
+        const count = await kv.getKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY);
+        if (!count) { return 0; }
+        
+        const parsedCount = parseInt(count as string, 10);
+        return isNaN(parsedCount) ? 0 : parsedCount;
+    } catch (error) {
+        console.error("[Visitor Count] Error:", error);
+        return 0;
+    }
+}

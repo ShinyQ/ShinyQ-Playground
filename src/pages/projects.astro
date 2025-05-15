@@ -61,14 +61,6 @@ const enhancedProjects = await Promise.all(
     };
   })
 );
-
-const allGalleryImages = enhancedProjects.flatMap((project) =>
-  project.gallery
-    .filter((img, idx) =>
-      idx === 0 && img.src === project.coverImage ? false : true
-    )
-    .map((img) => img.src)
-);
 ---
 
 <Layout
@@ -76,8 +68,13 @@ const allGalleryImages = enhancedProjects.flatMap((project) =>
   description={metadata.projects.description}
 >
   {
-    allGalleryImages.map((imageSrc) => (
-      <link rel="prefetch" href={imageSrc} as="image" />
+    enhancedProjects.map((project) => (
+      <link 
+        rel="preload" 
+        href={project.coverImage} 
+        as="image" 
+        fetchpriority="high"
+      />
     ))
   }
 
@@ -93,7 +90,6 @@ const allGalleryImages = enhancedProjects.flatMap((project) =>
       </p>
     </div>
 
-    <!-- Category filters -->
     <div class="mb-8 flex flex-wrap gap-2" id="category-filter">
       <button
         data-category="all"
@@ -113,12 +109,11 @@ const allGalleryImages = enhancedProjects.flatMap((project) =>
       }
     </div>
 
-    <!-- Projects grid -->
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       id="projects-grid"
     >
-      <ProjectGrid client:only="react" projects={enhancedProjects} />
+      <ProjectGrid client:visible projects={enhancedProjects} />
     </div>
 
     <div class="text-center py-20 hidden" id="no-projects">

@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from "@/components/custom/ThemeToggle";
+import ThemeSelector from "@/components/custom/ThemeSelector";
 import { Menu } from "lucide-react";
 
 const navItems = [
@@ -42,12 +43,16 @@ function isActive(path: string) {
             </a>
           ))
         }
-        <ThemeToggle client:load />
+        <div class="flex items-center gap-2">
+          <ThemeSelector client:load />
+          <ThemeToggle client:load />
+        </div>
       </nav>
 
       <!-- Mobile Navigation Toggle -->
       <div class="flex items-center md:hidden gap-4">
-        <div class="relative z-50">
+        <div class="relative z-50 flex items-center gap-2">
+          <ThemeSelector client:load />
           <ThemeToggle client:load />
         </div>
         <button

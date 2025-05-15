@@ -41,7 +41,7 @@
     }
 
     .blog-content code {
-        @apply bg-card px-1.5 py-0.5 rounded text-sm;
+        @apply px-1.5 py-0.5 rounded text-sm;
     }
 
     .blog-content img {

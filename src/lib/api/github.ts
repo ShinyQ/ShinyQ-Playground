@@ -1,11 +1,14 @@
 import { Octokit } from "@octokit/core";
-import redis from "@/lib/redis";
+import { KV } from "../kv";
 import { config } from "@/config";
 
-const octokit = new Octokit({ auth: config.GITHUB_API_TOKEN });
+const octokit = new Octokit({ auth: config.GITHUB.API_TOKEN });
 
-const CACHE_KEY = config.CACHE_KEY_TOP_REPO;
-const CACHE_TTL = config.CACHE_TOP_REPO_TTL;
+const CACHE_KEY = config.GITHUB.CACHE.KEY_TOP_REPO;
+const CACHE_TTL = parseInt(config.GITHUB.CACHE.TOP_REPO_TTL, 10);
+const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID;
+
+const kv = new KV();
 
 type RepoInfo = {
     name: string;
@@ -21,12 +24,10 @@ export async function getPublicRepositories(
     username = "ShinyQ"
 ): Promise<RepoInfo[]> {
     try {
-        const cached = await redis.get(CACHE_KEY);
-        if (cached) {
-            return JSON.parse(cached) as RepoInfo[];
-        }
+        const cached = await kv.getKey(NAMESPACE_ID, CACHE_KEY);
+        if (cached) { return JSON.parse(cached as string) as RepoInfo[]; }
     } catch (err) {
-        console.error("[Redis] Error during GET:", err);
+        console.error("[KV] Error during GET:", err);
     }
 
     try {
@@ -40,7 +41,7 @@ export async function getPublicRepositories(
             (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
         );
 
-        const topRepos = sortedRepos.slice(0, 6).map((repo) => ({
+        const topRepos: RepoInfo[] = sortedRepos.slice(0, 6).map((repo) => ({
             name: repo.name,
             description: repo.description,
             html_url: repo.html_url,
@@ -51,9 +52,9 @@ export async function getPublicRepositories(
         }));
 
         try {
-            await redis.set(CACHE_KEY, JSON.stringify(topRepos), "EX", CACHE_TTL);
+            await kv.putKey(NAMESPACE_ID, CACHE_KEY, JSON.stringify(topRepos), CACHE_TTL);
         } catch (err) {
-            console.error("[Redis] Error during SET:", err);
+            console.error("[KV] Error during SET:", err);
         }
 
         return topRepos;

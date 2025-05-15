@@ -127,7 +127,7 @@ const postsWithUrls = await Promise.all(
   </div>
 </Layout>
 
-<script define:vars={{ postsWithUrls }}>
+<script define:vars={{ postsWithUrls }} is:inline>
   const searchInput = document.getElementById("search-input");
   const tagsContainer = document.getElementById("tags-container");
   const postsContainer = document.getElementById("posts-container");
