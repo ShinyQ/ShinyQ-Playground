@@ -1,7 +1,11 @@
 import { KV } from "./kv";
 import { config } from "@/config";
 
-const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID;
+if (!config.CLOUDFLARE.KV.KV_NAMESPACE_ID) {
+    throw new Error("Cloudflare KV Namespace ID is required");
+}
+
+const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID as string;
 const kv = new KV();
 
 async function hashString(str: string): Promise<string> {
@@ -47,6 +51,31 @@ export async function getUniqueVisitorCount(): Promise<number> {
         return isNaN(parsedCount) ? 0 : parsedCount;
     } catch (error) {
         console.error("[Visitor Count] Error:", error);
+        return 0;
+    }
+}
+
+export async function incrementVisitorCount(ip: string): Promise<number> {
+    const uniqueKey = `${config.VISITOR.UNIQUE_KEY}:${ip}`;
+
+    try {
+        const exists = await kv.getKey(NAMESPACE_ID, uniqueKey);
+        if (exists) {
+            const current = await kv.getKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY);
+            const count = parseInt(current as string || "0", 10);
+            await kv.putKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY, (count + 1).toString());
+            return count + 1;
+        }
+
+        await Promise.all([
+            kv.putKey(NAMESPACE_ID, uniqueKey, "1", config.VISITOR.EXPIRY),
+            kv.putKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY, "1")
+        ]);
+
+        const count = await kv.getKey(NAMESPACE_ID, config.VISITOR.UNIQUE_KEY);
+        return parseInt(count as string || "0", 10);
+    } catch (error) {
+        console.error("[Visitor] Error incrementing count:", error);
         return 0;
     }
 }

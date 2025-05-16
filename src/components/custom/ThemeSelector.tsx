@@ -27,7 +27,7 @@ export default function ThemeSelector() {
     useEffect(() => {
         setMounted(true);
         // Get initial theme from localStorage
-        const savedTheme = localStorage.getItem("colorTheme") || "default";
+        const savedTheme = localStorage.getItem("colorTheme") ?? "default";
         setCurrentTheme(savedTheme);
     }, []);
 

@@ -123,7 +123,7 @@ function cacheUrl(key: string, url: string): void {
 
 // Exported functions
 export async function getSignedFileUrl(key: string): Promise<string> {
-    // Return as-is if it's already a URL
+    // Return as-is if it's already an URL
     if (key.startsWith("http://") || key.startsWith("https://")) {
         return key;
     }
@@ -166,7 +166,7 @@ export async function listDirectoryFiles(prefix: string): Promise<R2File[]> {
         });
 
         const response = await client.send(command);
-        return response.Contents || [];
+        return response.Contents ?? [];
     });
 
     if (!files) {

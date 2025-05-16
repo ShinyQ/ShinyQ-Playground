@@ -2,11 +2,15 @@ import { Octokit } from "@octokit/core";
 import { KV } from "../kv";
 import { config } from "@/config";
 
-const octokit = new Octokit({ auth: config.GITHUB.API_TOKEN });
+if (!config.GITHUB.API_TOKEN) {
+    throw new Error("GitHub API token is required");
+}
+
+const octokit = new Octokit({ auth: config.GITHUB.API_TOKEN as string });
 
 const CACHE_KEY = config.GITHUB.CACHE.KEY_TOP_REPO;
-const CACHE_TTL = parseInt(config.GITHUB.CACHE.TOP_REPO_TTL, 10);
-const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID;
+const CACHE_TTL = config.GITHUB.CACHE.TOP_REPO_TTL;
+const NAMESPACE_ID = config.CLOUDFLARE.KV.KV_NAMESPACE_ID as string;
 
 const kv = new KV();
 

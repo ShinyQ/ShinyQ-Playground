@@ -16,7 +16,7 @@ export const tagCategories: TagCategory[] = [
     {
         id: "ai",
         name: "AI & Data",
-        subcategories: ["Machine Learning", "Data Analysis", "Portfolio Optimization", "Natural Language Processing"]
+        subcategories: ["Machine Learning", "Data Analysis", "Portfolio Optimization", "NLP"]
     },
     {
         id: "uiux",
@@ -32,7 +32,7 @@ export const tagCategories: TagCategory[] = [
 
 export function getSubcategories(categoryId: string): string[] {
     const category = tagCategories.find(cat => cat.id === categoryId);
-    return category?.subcategories || [];
+    return category?.subcategories ?? [];
 }
 
 export function getCategoryForTag(tag: string): string | null {

@@ -1,37 +1,107 @@
 import dotenv from 'dotenv';
+import { z } from 'zod';
+
 dotenv.config();
 
-export const config = {
+// Time constants (in seconds)
+const FIVE_MINUTES = 5 * 60;
+const TEN_MINUTES = 10 * 60;
+const ONE_WEEK = 7 * 24 * 60 * 60;
+
+const getEnvVar = (key: string): string | undefined => {
+    if (typeof import.meta.env === 'undefined') { return undefined; }
+    return import.meta.env[key];
+};
+
+const configSchema = z.object({
+    GITHUB: z.object({
+        API_TOKEN: z.string().optional(),
+        CACHE: z.object({
+            KEY_TOP_REPO: z.string(),
+            TOP_REPO_TTL: z.number().default(ONE_WEEK),
+        }),
+    }),
+    CACHE: z.object({
+        DEFAULT_TTL: z.number().default(FIVE_MINUTES * 1000), // in milliseconds
+    }),
+    VISITOR: z.object({
+        UNIQUE_KEY: z.string(),
+        EXPIRY: z.number().default(FIVE_MINUTES), // in seconds
+    }),
+    R2: z.object({
+        SIGNED_URL_EXPIRY: z.number().default(TEN_MINUTES), // in seconds
+        OPERATION_TIMEOUT: z.number().default(3000), // in milliseconds
+    }),
+    CLOUDFLARE: z.object({
+        KV: z.object({
+            ACCOUNT_ID: z.string().optional(),
+            API_TOKEN: z.string().optional(),
+            KV_NAMESPACE_ID: z.string().optional(),
+            CLOUDFLARE_EMAIL: z.string().email("Invalid Cloudflare email").optional(),
+        }),
+        R2: z.object({
+            ACCOUNT_ID: z.string().optional(),
+            ACCESS_KEY_ID: z.string().optional(),
+            SECRET_ACCESS_KEY: z.string().optional(),
+            BUCKET_NAME: z.string().optional(),
+        }),
+    }),
+});
+
+// Parse and validate configuration
+const config = configSchema.parse({
     GITHUB: {
-        API_TOKEN: import.meta.env.GITHUB_API_TOKEN,
+        API_TOKEN: getEnvVar('GITHUB_API_TOKEN'),
         CACHE: {
             KEY_TOP_REPO: 'github:top_repos',
-            TOP_REPO_TTL: '604800',
+            TOP_REPO_TTL: ONE_WEEK,
         }
     },
     CACHE: {
-        DEFAULT_TTL: 5 * 60 * 1000, // 5 minutes
+        DEFAULT_TTL: FIVE_MINUTES * 1000,
     },
     VISITOR: {
         UNIQUE_KEY: "site:unique_visitors",
-        EXPIRY: 60 * 5, // 5 minutes
+        EXPIRY: FIVE_MINUTES,
     },
     R2: {
-        SIGNED_URL_EXPIRY: 600, // 10 minutes in seconds
-        OPERATION_TIMEOUT: 3000, // 3 seconds in milliseconds
+        SIGNED_URL_EXPIRY: TEN_MINUTES,
+        OPERATION_TIMEOUT: 3000,
     },
     CLOUDFLARE: {
         KV: {
-            ACCOUNT_ID: import.meta.env.CLOUDFLARE_ACCOUNT_ID,
-            API_TOKEN: import.meta.env.CLOUDFLARE_KV_API_TOKEN,
-            KV_NAMESPACE_ID: import.meta.env.CLOUDFLARE_KV_NAMESPACE_ID,
-            CLOUDFLARE_EMAIL: import.meta.env.CLOUDFLARE_EMAIL,
+            ACCOUNT_ID: getEnvVar('CLOUDFLARE_ACCOUNT_ID'),
+            API_TOKEN: getEnvVar('CLOUDFLARE_KV_API_TOKEN'),
+            KV_NAMESPACE_ID: getEnvVar('CLOUDFLARE_KV_NAMESPACE_ID'),
+            CLOUDFLARE_EMAIL: getEnvVar('CLOUDFLARE_EMAIL'),
         },
         R2: {
-            ACCOUNT_ID: import.meta.env.CLOUDFLARE_R2_ACCOUNT_ID,
-            ACCESS_KEY_ID: import.meta.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
-            SECRET_ACCESS_KEY: import.meta.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
-            BUCKET_NAME: import.meta.env.CLOUDFLARE_R2_BUCKET_NAME
+            ACCOUNT_ID: getEnvVar('CLOUDFLARE_R2_ACCOUNT_ID'),
+            ACCESS_KEY_ID: getEnvVar('CLOUDFLARE_R2_ACCESS_KEY_ID'),
+            SECRET_ACCESS_KEY: getEnvVar('CLOUDFLARE_R2_SECRET_ACCESS_KEY'),
+            BUCKET_NAME: getEnvVar('CLOUDFLARE_R2_BUCKET_NAME'),
         }
     }
-} as const;
+});
+
+// Validate required environment variables at runtime
+if (typeof window === 'undefined') {
+    const requiredEnvVars = [
+        'GITHUB_API_TOKEN',
+        'CLOUDFLARE_ACCOUNT_ID',
+        'CLOUDFLARE_KV_API_TOKEN',
+        'CLOUDFLARE_KV_NAMESPACE_ID',
+        'CLOUDFLARE_EMAIL',
+        'CLOUDFLARE_R2_ACCOUNT_ID',
+        'CLOUDFLARE_R2_ACCESS_KEY_ID',
+        'CLOUDFLARE_R2_SECRET_ACCESS_KEY',
+        'CLOUDFLARE_R2_BUCKET_NAME'
+    ];
+
+    const missingVars = requiredEnvVars.filter(varName => !getEnvVar(varName));
+    if (missingVars.length > 0) {
+        console.warn('Missing required environment variables:', missingVars);
+    }
+}
+
+export { config };

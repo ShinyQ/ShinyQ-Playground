@@ -22,7 +22,7 @@ export default function Timeline({ items, filters }: Readonly<TimelineProps>) {
                 transition={{ duration: 0.5 }} 
                 className="mb-12"
             >
-                <div className="text-sm text-primary font-mono mb-2">// life activities timeline</div>
+                <div className="text-sm text-primary font-mono mb-2">{ "// life activities timeline" }</div>
                 <h1 className="text-3xl md:text-4xl font-bold mb-6">Journey</h1>
                 <p className="text-lg text-foreground/80 max-w-3xl">
                     My professional journey, education, and key milestones over the years.

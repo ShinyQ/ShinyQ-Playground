@@ -47,8 +47,8 @@ export default function TimelineItem({ item }: TimelineItemProps) {
                 </div>
                 {item.description && item.description.length > 0 && (
                     <ul className="space-y-2 mb-4">
-                        {item.description.map((desc, i) => (
-                            <li key={i} className="flex items-start gap-2">
+                        {item.description.map((desc) => (
+                            <li key={desc} className="flex items-start gap-2">
                                 <span className="text-primary mt-1">▹</span>
                                 <span>{desc}</span>
                             </li>
@@ -59,7 +59,7 @@ export default function TimelineItem({ item }: TimelineItemProps) {
                     <div className="mt-4 flex flex-wrap gap-2">
                         {item.tools.map((tool, i) => (
                             <motion.span
-                                key={i}
+                                key={tool}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: i * 0.1 }}
