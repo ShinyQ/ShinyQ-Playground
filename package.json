@@ -3,9 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "browser": {
-    "os": false
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",

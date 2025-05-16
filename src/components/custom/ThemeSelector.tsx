@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Paintbrush } from "lucide-react";
-import { colorPalettes } from "@/components/ui/colorPalettes";
+import { colorPalettes } from "@/data/colorPalettes";
 
 export default function ThemeSelector() {
     const [isOpen, setIsOpen] = useState(false);
