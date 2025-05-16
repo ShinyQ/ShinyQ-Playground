@@ -28,6 +28,8 @@ export const techItems: TechItem[] = [
   { name: "Streamlit", icon: "/icons/streamlit.webp", type: "frontend", site: "https://streamlit.io/" },
   { name: "Bootstrap", icon: "/icons/bootstrap.webp", type: "frontend", site: "https://getbootstrap.com/" },
   { name: "Svelte", icon: "/icons/svelte.webp", type: "frontend", site: "https://svelte.dev/" },
+  { name: "Astro", icon: "/icons/astro.webp", type: "frontend", site: "https://astro.build/" },
+  { name: "Vite", icon: "/icons/vite.webp", type: "frontend", site: "https://vitejs.dev/" },
 
   // Others
   { name: "Docker", icon: "/icons/docker.webp", type: "other", site: "https://www.docker.com/" },

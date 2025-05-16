@@ -1,5 +1,5 @@
 export interface TimelineItem {
-  id: number;
+  slug: string;
   startDate: string;
   endDate: string;
   title: string;
@@ -23,7 +23,7 @@ export interface TimelineProps {
 
 export const timelineItems: TimelineItem[] = [
   {
-    id: 1,
+    slug: "jenius-software-engineer",
     startDate: "2024-06",
     endDate: "Present",
     title: "PT SMBC Indonesia Tbk (Jenius)",
@@ -56,7 +56,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Full-Time",
   },
   {
-    id: 2,
+    slug: "jatis-fullstack-developer",
     startDate: "2023-03",
     endDate: "2024-06",
     title: "PT Informasi Teknologi Indonesia (Jatis)",
@@ -81,7 +81,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Full-Time",
   },
   {
-    id: 3,
+    slug: "mnc-backend-engineer",
     startDate: "2022-02",
     endDate: "2023-02",
     title: "PT MNC Asia Holding Tbk",
@@ -99,7 +99,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Full-Time",
   },
   {
-    id: 4,
+    slug: "jublia-backend-engineer",
     startDate: "2023-09",
     endDate: "2023-12",
     title: "Jublia Pte Ltd (Singapore)",
@@ -125,7 +125,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
   },
   {
-    id: 5,
+    slug: "shumi-backend-engineer",
     startDate: "2019-09",
     endDate: "2022-12",
     title: "Shumi",
@@ -148,7 +148,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
   },
   {
-    id: 6,
+    slug: "bssn-backend-engineer",
     startDate: "2023-05",
     endDate: "2023-07",
     title: "BSSN (Indonesia National Cyber and Crypto Agency)",
@@ -164,7 +164,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Part-Time",
   },
   {
-    id: 7,
+    slug: "its-mmt",
     startDate: "2024-01",
     endDate: "Present",
     title: "Sepuluh Nopember Institute of Technology",
@@ -179,7 +179,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Education",
   },
   {
-    id: 8,
+    slug: "telkom-university-bsc",
     startDate: "2019-08",
     endDate: "2023-08",
     title: "Telkom University",
@@ -194,7 +194,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Education",
   },
   {
-    id: 9,
+    slug: "closer-hackathon-2022",
     startDate: "2022-11",
     endDate: "2022-11",
     title: "Closer 8th Hackathon Competition",
@@ -203,7 +203,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 10,
+    slug: "business-plan-competition-2022",
     startDate: "2022-08",
     endDate: "2022-08",
     title: "International Business Plan Competition",
@@ -212,7 +212,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 11,
+    slug: "ifest-data-analysis-2021",
     startDate: "2021-10",
     endDate: "2021-10",
     title: "IFEST 2021: Data Analysis Competition",
@@ -221,7 +221,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 12,
+    slug: "isfest-data-competition-2021",
     startDate: "2021-07",
     endDate: "2021-07",
     title: "ISFEST UMN 2021: Data Competition",
@@ -230,7 +230,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 13,
+    slug: "foresty-ctf-2021",
     startDate: "2021-03",
     endDate: "2021-03",
     title: "Foresty CTF Competition 2021",
@@ -239,7 +239,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 14,
+    slug: "business-pitching-2021",
     startDate: "2021-01",
     endDate: "2021-01",
     title: "Business Pitching Competition",
@@ -248,7 +248,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 15,
+    slug: "scientific-writing-2020",
     startDate: "2020-12",
     endDate: "2020-12",
     title: "Scientific Writing Codig 3.0",
@@ -257,7 +257,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 16,
+    slug: "it-business-competition-2020",
     startDate: "2020-07",
     endDate: "2020-07",
     title: "IT Business Competition 2020",
@@ -266,7 +266,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 17,
+    slug: "uiux-design-competition-2020",
     startDate: "2020-05",
     endDate: "2020-05",
     title: "UI/UX Design Competition",
@@ -275,7 +275,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 18,
+    slug: "ctf-competition-2020",
     startDate: "2020-02",
     endDate: "2020-02",
     title: "Capture The Flag Competition",
@@ -284,7 +284,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 19,
+    slug: "uiux-competition-2019",
     startDate: "2019-11",
     endDate: "2019-11",
     title: "UI/UX Competition",
@@ -293,7 +293,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 20,
+    slug: "sigma-idea-competition-2019",
     startDate: "2019-09",
     endDate: "2019-09",
     title: "Sigma Idea Competition 2019",
@@ -302,7 +302,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 21,
+    slug: "web-dev-competition-2019",
     startDate: "2019-09",
     endDate: "2019-09",
     title: "Web Development Competition Vision",
@@ -311,7 +311,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Competition",
   },
   {
-    id: 22,
+    slug: "toefl-itp",
     startDate: "2024-01-03",
     endDate: "2026-01-03",
     title: "TOEFL ITP",
@@ -323,7 +323,7 @@ export const timelineItems: TimelineItem[] = [
     type: "Certification",
   },
   {
-    id: 23,
+    slug: "digitalent-ml-certification",
     startDate: "2021-05-31",
     endDate: "2021-07-16",
     title: "Digitalent Machine Learning Certification",
@@ -341,7 +341,7 @@ export const timelineItems: TimelineItem[] = [
     tools: ["Python", "scikit-learn", "TensorFlow", "Pytorch", "Keras", "Matplotlib", "Seaborn", "Google Colab"]
   },
   {
-    id: 23,
+    slug: "microcredential-data-scientist",
     startDate: "2021-11-01",
     endDate: "2021-12-10",
     title: "Microcredential Certification: Associate Data Scientist",

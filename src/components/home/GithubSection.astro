@@ -3,6 +3,7 @@ import { getPublicRepositories } from "@/lib/api/github";
 
 let repos: any[] = [];
 let error: string | null = null;
+
 try {
   repos = (await getPublicRepositories()) as any[];
 } catch (e: unknown) {

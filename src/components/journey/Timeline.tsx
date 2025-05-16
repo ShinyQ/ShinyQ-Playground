@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { containerVariants } from '@/components/ui/timeline-animations';
+import { containerVariants } from '@/scripts/timeline-animations';
 import TimelineItem from '@/components/journey/TimelineItem';
 import type { TimelineProps } from '@/data/timeline';
 
@@ -16,13 +16,13 @@ export default function Timeline({ items, filters }: Readonly<TimelineProps>) {
     return (
         <>
             {/* Header */}
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.5 }} 
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
                 className="mb-12"
             >
-                <div className="text-sm text-primary font-mono mb-2">{ "// life activities timeline" }</div>
+                <div className="text-sm text-primary font-mono mb-2">{"// life activities timeline"}</div>
                 <h1 className="text-3xl md:text-4xl font-bold mb-6">Journey</h1>
                 <p className="text-lg text-foreground/80 max-w-3xl">
                     My professional journey, education, and key milestones over the years.
@@ -30,10 +30,10 @@ export default function Timeline({ items, filters }: Readonly<TimelineProps>) {
             </motion.div>
 
             {/* Filters */}
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.5, delay: 0.2 }} 
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 className="mb-10 flex flex-wrap gap-2"
             >
                 {filters.map(({ label, value }) => (
@@ -51,15 +51,15 @@ export default function Timeline({ items, filters }: Readonly<TimelineProps>) {
             {/* Timeline Items */}
             <div className="relative border-l border-border">
                 <AnimatePresence mode="wait">
-                    <motion.div 
-                        key={activeFilter} 
-                        variants={containerVariants} 
-                        initial="hidden" 
-                        animate="visible" 
+                    <motion.div
+                        key={activeFilter}
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
                         className="relative"
                     >
                         {filteredItems.length > 0 ? (
-                            filteredItems.map(item => <TimelineItem key={item.id} item={item} />)
+                            filteredItems.map(item => <TimelineItem key={item.slug} item={item} />)
                         ) : (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}

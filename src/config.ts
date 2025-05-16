@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
 import { z } from 'zod';
-
-dotenv.config();
 
 // Time constants (in seconds)
 const FIVE_MINUTES = 5 * 60;
@@ -36,7 +33,6 @@ const configSchema = z.object({
             ACCOUNT_ID: z.string().optional(),
             API_TOKEN: z.string().optional(),
             KV_NAMESPACE_ID: z.string().optional(),
-            CLOUDFLARE_EMAIL: z.string().email("Invalid Cloudflare email").optional(),
         }),
         R2: z.object({
             ACCOUNT_ID: z.string().optional(),
@@ -72,7 +68,6 @@ const config = configSchema.parse({
             ACCOUNT_ID: getEnvVar('CLOUDFLARE_ACCOUNT_ID'),
             API_TOKEN: getEnvVar('CLOUDFLARE_KV_API_TOKEN'),
             KV_NAMESPACE_ID: getEnvVar('CLOUDFLARE_KV_NAMESPACE_ID'),
-            CLOUDFLARE_EMAIL: getEnvVar('CLOUDFLARE_EMAIL'),
         },
         R2: {
             ACCOUNT_ID: getEnvVar('CLOUDFLARE_R2_ACCOUNT_ID'),
@@ -90,7 +85,6 @@ if (typeof window === 'undefined') {
         'CLOUDFLARE_ACCOUNT_ID',
         'CLOUDFLARE_KV_API_TOKEN',
         'CLOUDFLARE_KV_NAMESPACE_ID',
-        'CLOUDFLARE_EMAIL',
         'CLOUDFLARE_R2_ACCOUNT_ID',
         'CLOUDFLARE_R2_ACCESS_KEY_ID',
         'CLOUDFLARE_R2_SECRET_ACCESS_KEY',

@@ -1,6 +1,5 @@
 ---
 import { techItems } from "@/data/techStack";
-import { Image } from 'astro:assets';
 
 const backend = techItems.filter((item) => item.type === "backend");
 const frontend = techItems.filter((item) => item.type === "frontend");
@@ -16,9 +15,9 @@ const other = techItems.filter((item) => item.type === "other");
       Full-stack development with scalable backends, AI integration, and modern frontend architectures
     </p>
     <div class="space-y-4">
-      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+      <div class="tech-slider relative overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
-          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+          <div class="marquee flex gap-3 w-max px-2">
             {[...backend, ...backend].map((tech) =>
               tech.site ? (
                 <a
@@ -30,12 +29,13 @@ const other = techItems.filter((item) => item.type === "other");
                   title={`${tech.name} - Backend Technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -47,12 +47,13 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`${tech.name} backend technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -62,9 +63,9 @@ const other = techItems.filter((item) => item.type === "other");
           </div>
         </div>
       </div>
-      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+      <div class="tech-slider relative overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
-          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+          <div class="marquee-slow flex gap-3 w-max px-2">
             {[...frontend, ...frontend].map((tech) =>
               tech.site ? (
                 <a
@@ -76,12 +77,13 @@ const other = techItems.filter((item) => item.type === "other");
                   title={`${tech.name} - Frontend Technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -93,12 +95,13 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`${tech.name} frontend technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -108,9 +111,9 @@ const other = techItems.filter((item) => item.type === "other");
           </div>
         </div>
       </div>
-      <div class="relative group overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
+      <div class="tech-slider relative overflow-hidden border border-border rounded-lg bg-gradient-to-r py-0">
         <div class="w-full relative overflow-hidden">
-          <div class="flex gap-3 w-max px-2 animate-marquee-fast group-hover:[animation-play-state:paused]">
+          <div class="marquee-fast flex gap-3 w-max px-2">
             {[...other, ...other].map((tech) =>
               tech.site ? (
                 <a
@@ -122,12 +125,13 @@ const other = techItems.filter((item) => item.type === "other");
                   title={`${tech.name} - Technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -139,12 +143,13 @@ const other = techItems.filter((item) => item.type === "other");
                   aria-label={`${tech.name} technology`}
                 >
                   <div class="w-6 h-6 bg-white rounded-sm p-0.5">
-                    <Image
+                    <img
                       src={tech.icon}
                       alt={`${tech.name} technology icon`}
                       width={24}
                       height={24}
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                     />
                   </div>
                   <span class="whitespace-nowrap">{tech.name}</span>
@@ -158,18 +163,22 @@ const other = techItems.filter((item) => item.type === "other");
   </div>
 </section>
 
-<style>
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-50% - 0.5rem));
-    }
-  }
-
-  .animate-marquee-fast {
-    animation: marquee 15s linear infinite;
-  }
-</style>
+<script>
+  // For ensuring animation properly resumes and stops on hover
+  document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.tech-slider');
+    
+    sliders.forEach(slider => {
+      slider.addEventListener('mouseenter', () => {
+        const marquee = slider.querySelector('.marquee, .marquee-slow, .marquee-fast');
+        if (marquee) (marquee as HTMLElement).style.animationPlayState = 'paused';
+      });
+      
+      slider.addEventListener('mouseleave', () => {
+        const marquee = slider.querySelector('.marquee, .marquee-slow, .marquee-fast');
+        if (marquee) (marquee as HTMLElement).style.animationPlayState = 'running';
+      });
+    });
+  });
+</script>
 

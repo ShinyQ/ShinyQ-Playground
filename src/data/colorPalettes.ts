@@ -71,22 +71,16 @@ export const colorPalettes: Record<string, ColorPalette> = {
             cardForeground: "30 20% 90%",           // ember light
             popover: "22 15% 12%",                  // scorched surface
             popoverForeground: "30 20% 90%",
-
             primary: "32 100% 50%",                 // explosive orange (his quirk)
             primaryForeground: "0 0% 100%",         // white spark
-
             secondary: "20 10% 20%",                // burnt leather
             secondaryForeground: "30 20% 90%",
-
             muted: "22 10% 25%",                    // charcoal rust
             mutedForeground: "35 10% 60%",
-
             accent: "38 85% 55%",                   // golden explosion
             accentForeground: "0 0% 100%",
-
             destructive: "0 85% 60%",               // intense red (his rage)
             destructiveForeground: "0 0% 100%",
-
             border: "20 10% 25%",
             input: "20 10% 20%",
             ring: "32 100% 50%",

@@ -33,7 +33,8 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    {/* Prevent theme flash - must be first */}
+
+    {/* Prevent theme flash */}
     <script define:vars={{ colorPalettes }} is:inline>
       const palettes = colorPalettes;
       (function() {
@@ -78,7 +79,7 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
       :root:not(.dark) {
         color-scheme: light;
       }
-      /* Hide theme selector until theme is loaded */
+
       .theme-selector {
         opacity: 0;
         transition: opacity 0.2s ease-in-out;

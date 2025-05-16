@@ -73,15 +73,14 @@ const icons: IconConfig[] = [
   <div class="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
   <div class="absolute inset-0">
     {
-        icons.map(({ Icon, x, y, mobileX, mobileY }, idx) =>
+        icons.map(({ Icon, x, y, mobileX, mobileY }) =>
           Icon ? (
             <div>
               <Icon
                 className="absolute text-muted/20 hover:text-muted/40 transition-colors duration-300 hidden md:block icon-scatter"
                 style={{
                   left: x,
-                  top: y,
-                  animationDelay: `${(idx % 5) * -1.5}s`
+                  top: y
                 }}
                 size={130}
               />
@@ -89,8 +88,7 @@ const icons: IconConfig[] = [
                 className="absolute text-muted/20 hover:text-muted/40 transition-colors duration-300 md:hidden icon-scatter"
                 style={{
                   left: mobileX,
-                  top: mobileY,
-                  animationDelay: `${(idx % 5) * -1.5}s`
+                  top: mobileY
                 }}
                 size={60}
               />
@@ -102,31 +100,11 @@ const icons: IconConfig[] = [
 </div>
 
 <style>
-  @keyframes float {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
-
-  .absolute > svg {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .absolute > svg:nth-child(odd) {
-    animation-delay: -3s;
-  }
-
   :global(.light) .icon-scatter {
-    color: rgb(156 163 175 / 0.2); /* gray-400 with 20% opacity */
+    color: rgb(156 163 175 / 0.12); /* On light mode, gray-400 with 12% opacity */
   }
 
-  :global(.light) .icon-scatter:hover {
-    color: rgb(156 163 175 / 0.4); /* gray-400 with 40% opacity */
+  :global(.dark) .icon-scatter {
+    color: rgb(156 163 175 / 0.05); /* On dark mode, gray-400 with 5% opacity */
   }
 </style>

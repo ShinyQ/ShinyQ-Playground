@@ -113,6 +113,11 @@ const ProjectGrid: React.FC<ProjectGridProps> = ({ projects }) => {
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
+                onError={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  img.src = "/placeholder.svg";
+                  img.classList.add('loaded');
+                }}
                 onLoad={(e) => {
                   const img = e.target as HTMLImageElement;
                   img.classList.add('loaded');

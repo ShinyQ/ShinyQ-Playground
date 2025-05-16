@@ -7,7 +7,6 @@ import { metadata } from "@/data/metadata";
 import { getSignedFileUrl } from "@/lib/r2";
 
 const profileImage = await getSignedFileUrl("photo/profile.png");
-const cvUrl = await getSignedFileUrl("files/cv.pdf");
 ---
 
 <Layout title={metadata.about.title} description={metadata.about.description}>
@@ -40,6 +39,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                     height={400}
                     class="w-full h-auto"
                     loading="eager"
+                    onerror="this.onerror=null; this.src='/placeholder.svg';"
                   />
                 </div>
 
@@ -89,7 +89,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
 
         {/* Curriculum Vitae Button */}
         <div class="flex gap-4 mt-6 mb-5 animate-fade-in">
-          <CVDialog client:visible cvUrl={cvUrl} />
+          <CVDialog client:visible />
         </div>
 
         {/* Intro Section */}
@@ -108,7 +108,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
             {
               aboutInfo.philosophy.map((item) => (
                 <li class="flex items-start gap-2">
-                  <span class="text-primary mt-1">▹</span>
+                  <span class="text-primary">▹</span>
                   <span>{item}</span>
                 </li>
               ))
@@ -127,7 +127,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
             {
               aboutInfo.workingStyle.map((item) => (
                 <li class="flex items-start gap-2">
-                  <span class="text-primary mt-1">▹</span>
+                  <span class="text-primary">▹</span>
                   <span>{item}</span>
                 </li>
               ))
@@ -146,7 +146,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
             {
               aboutInfo.favoriteTech.map((item) => (
                 <li class="flex items-start gap-2">
-                  <span class="text-primary mt-1">▹</span>
+                  <span class="text-primary">▹</span>
                   <span>{item}</span>
                 </li>
               ))
@@ -181,6 +181,7 @@ const cvUrl = await getSignedFileUrl("files/cv.pdf");
                   height={400}
                   class="w-full h-auto"
                   loading="eager"
+                  onerror="this.onerror=null; this.src='/placeholder.svg';"
                 />
               </div>
 

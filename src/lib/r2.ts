@@ -2,7 +2,9 @@ import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/clien
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { config } from "@/config";
 
-// Types
+/**
+ * Represents a file in R2 storage.
+ */
 export interface R2File {
     key: string;
     size?: number;
@@ -19,10 +21,11 @@ interface R2ClientConfig {
     forcePathStyle: boolean;
 }
 
-// Constants
 const URL_CACHE = new Map<string, { url: string; expires: number }>();
 
-// Client management
+/**
+ * Singleton class for managing the R2 S3 client instance.
+ */
 class R2ClientManager {
     private static instance: R2ClientManager;
     private client: S3Client | null = null;
@@ -32,16 +35,22 @@ class R2ClientManager {
         this.initializeConfig();
     }
 
+    /**
+     * Returns the singleton instance of the R2ClientManager.
+     * @returns The R2ClientManager instance
+     */
     public static getInstance(): R2ClientManager {
         if (!R2ClientManager.instance) {
             R2ClientManager.instance = new R2ClientManager();
         }
-
         return R2ClientManager.instance;
     }
 
+    /**
+     * Initializes the R2 configuration based on the runtime environment.
+     */
     private initializeConfig(): void {
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
             console.error("R2 client is not available in the browser");
             return;
         }
@@ -64,6 +73,10 @@ class R2ClientManager {
         };
     }
 
+    /**
+     * Returns the S3 client instance. Initializes it if not already done.
+     * @returns The initialized S3 client or null if setup failed
+     */
     public getClient(): S3Client | null {
         if (!this.config) {
             console.error("R2 client configuration is not initialized");
@@ -79,6 +92,11 @@ class R2ClientManager {
         }
     }
 
+    /**
+     * Executes an operation using the R2 S3 client.
+     * @param operation - A callback receiving the client to perform an operation
+     * @returns The result of the operation or null if it fails
+     */
     public async withClient<T>(operation: (client: S3Client) => Promise<T>): Promise<T | null> {
         const client = this.getClient();
         if (!client) {
@@ -90,72 +108,108 @@ class R2ClientManager {
             return await Promise.race([
                 operation(client),
                 new Promise<null>((_, reject) =>
-                    setTimeout(() => reject(new Error('Operation timeout')), config.R2.OPERATION_TIMEOUT)
-                )
+                    setTimeout(() => reject(new Error("Operation timeout")), config.R2.OPERATION_TIMEOUT)
+                ),
             ]);
         } catch (error) {
-            console.error('R2 operation failed:', error);
+            console.error("R2 operation failed:", error);
             return null;
         }
     }
 }
 
-// URL Caching
+/**
+ * Retrieves a cached signed URL for the given key, if available and valid.
+ * @param key - The file key
+ * @returns The cached signed URL or null if not available
+ */
 function getCachedUrl(key: string): string | null {
     const cached = URL_CACHE.get(key);
-
     if (cached && Date.now() < cached.expires) {
         return cached.url;
     }
-
     URL_CACHE.delete(key);
-
     return null;
 }
 
+/**
+ * Caches the signed URL for a given key with an adjusted expiry time.
+ * @param key - The file key
+ * @param url - The signed URL to cache
+ */
 function cacheUrl(key: string, url: string): void {
-    // Cache for slightly less than the signed URL expiry
     URL_CACHE.set(key, {
         url,
-        expires: Date.now() + (config.R2.SIGNED_URL_EXPIRY - 60) * 1000
+        expires: Date.now() + (config.R2.SIGNED_URL_EXPIRY - 60) * 1000,
     });
 }
 
-// Exported functions
+/**
+ * Clears the cache for a specific key or the entire cache if no key is provided.
+ * @param key - The specific key to clear, or all if omitted
+ */
+function clearCache(key?: string): void {
+    if (key) {
+        URL_CACHE.delete(key);
+    } else {
+        URL_CACHE.clear();
+    }
+}
+
+/**
+ * Retrieves a signed URL for accessing a file in R2.
+ * Falls back to a placeholder if signing fails and delete the cache.
+ * @param key - The key of the file
+ * @returns The signed URL or a placeholder path
+ */
 export async function getSignedFileUrl(key: string): Promise<string> {
-    // Return as-is if it's already an URL
     if (key.startsWith("http://") || key.startsWith("https://")) {
         return key;
     }
 
-    // Check cache first
-    const cachedUrl = getCachedUrl(key);
-    if (cachedUrl) {
-        return cachedUrl;
+    if (key === "placeholder.svg") {
+        return "/placeholder.svg";
     }
 
-    const r2Manager = R2ClientManager.getInstance();
+    try {
+        const cachedUrl = getCachedUrl(key);
+        if (cachedUrl) {
+            return cachedUrl;
+        }
 
-    const signedUrl = await r2Manager.withClient(async (client) => {
-        const command = new GetObjectCommand({
-            Bucket: config.CLOUDFLARE.R2.BUCKET_NAME,
-            Key: key,
+        const r2Manager = R2ClientManager.getInstance();
+
+        const signedUrl = await r2Manager.withClient(async (client) => {
+            const command = new GetObjectCommand({
+                Bucket: config.CLOUDFLARE.R2.BUCKET_NAME,
+                Key: key,
+            });
+
+            return getSignedUrl(client, command, {
+                expiresIn: config.R2.SIGNED_URL_EXPIRY,
+                signableHeaders: new Set(["host"]),
+            });
         });
 
-        return getSignedUrl(client, command, {
-            expiresIn: config.R2.SIGNED_URL_EXPIRY,
-            signableHeaders: new Set(["host"]),
-        });
-    });
+        if (signedUrl) {
+            cacheUrl(key, signedUrl);
+            return signedUrl;
+        }
 
-    if (signedUrl) {
-        cacheUrl(key, signedUrl);
-        return signedUrl;
+        clearCache(key);
+        return "/placeholder.svg";
+    } catch (error) {
+        console.error("Error getting signed URL:", error);
+        clearCache(key);
+        return "/placeholder.svg";
     }
-
-    return `/fallback/${key}`;
 }
 
+/**
+ * Lists files in a directory within the R2 bucket.
+ * @param prefix - The prefix path representing the directory
+ * @returns An array of R2File entries
+ */
 export async function listDirectoryFiles(prefix: string): Promise<R2File[]> {
     const r2Manager = R2ClientManager.getInstance();
 
