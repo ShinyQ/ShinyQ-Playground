@@ -10,3 +10,7 @@ directory = "./dist"
 
 [observability]
 enabled = true
+
+[[r2_buckets]]
+binding = 'MY_BUCKET'
+bucket_name = 'shinyq'

@@ -16,15 +16,7 @@ export default defineConfig({
         "react-dom/server": "react-dom/server.edge",
       },
     },
-    ssr: {
-      external: ["dotenv", "crypto", "path", "os", "events", "stream", "util", "net", "tls", "url", "dns", "assert", "buffer", "string_decoder"],
-    },
   },
   output: "server",
-  adapter: cloudflare({
-    imageService: 'cloudflare',
-    platformProxy: {
-      enabled: true,
-    },
-  }),
+  adapter: cloudflare(),
 });
