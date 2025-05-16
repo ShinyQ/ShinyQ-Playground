@@ -5,7 +5,6 @@ dotenv.config();
 
 // Time constants (in seconds)
 const FIVE_MINUTES = 5 * 60;
-const TEN_MINUTES = 10 * 60;
 const ONE_WEEK = 7 * 24 * 60 * 60;
 
 const getEnvVar = (key: string): string | undefined => {
@@ -29,7 +28,7 @@ const configSchema = z.object({
         EXPIRY: z.number().default(FIVE_MINUTES), // in seconds
     }),
     R2: z.object({
-        SIGNED_URL_EXPIRY: z.number().default(TEN_MINUTES), // in seconds
+        SIGNED_URL_EXPIRY: z.number().default(ONE_WEEK), // in seconds
         OPERATION_TIMEOUT: z.number().default(3000), // in milliseconds
     }),
     CLOUDFLARE: z.object({
@@ -65,7 +64,7 @@ const config = configSchema.parse({
         EXPIRY: FIVE_MINUTES,
     },
     R2: {
-        SIGNED_URL_EXPIRY: TEN_MINUTES,
+        SIGNED_URL_EXPIRY: ONE_WEEK,
         OPERATION_TIMEOUT: 3000,
     },
     CLOUDFLARE: {
