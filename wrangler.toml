@@ -2,7 +2,11 @@
 name = "shinyq-playground"
 compatibility_date = "2025-03-25"
 compatibility_flags = [ "nodejs_compat" ]
-pages_build_output_dir = "./dist"
+main = "./dist/_worker.js/index.js"
+
+[assets]
+binding = "ASSETS"
+directory = "./dist"
 
 [observability]
 enabled = true
