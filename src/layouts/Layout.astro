@@ -107,13 +107,19 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     <meta name="twitter:site" content="@kurniadiwijaya" />
     <meta name="twitter:image" content={defaultImage} />
 
-    {/* Google Analytics */}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0WDF3MR3D" is:inline></script>
+    {/* Google Analytics - Delayed Loading */}
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-T0WDF3MR3D');
+      setTimeout(() => {
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-T0WDF3MR3D';
+        script.async = true;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-T0WDF3MR3D');
+      }, 2000);
     </script>
 
     {/* Preload main Google Fonts for LCP optimization */}
