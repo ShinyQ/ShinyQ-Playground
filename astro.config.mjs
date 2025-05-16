@@ -3,7 +3,6 @@ import react from "@astrojs/react";
 import path from "path";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
@@ -11,13 +10,9 @@ export default defineConfig({
   site: "https://kurniadi.pages.dev",
   vite: {
     resolve: {
-      alias: import.meta.env.PROD && {
-        "@": path.resolve("./src"),
-        "react-dom/server": "react-dom/server.edge",
-        "node:os": false,
-      },
+      alias: {
+        '@': path.resolve('./src')
+      }
     },
   },
-  output: "server",
-  adapter: cloudflare(),
 });
