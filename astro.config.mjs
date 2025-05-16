@@ -18,7 +18,6 @@ export default defineConfig({
     },
     ssr: {
       external: ["dotenv", "crypto", "path", "os", "events", "stream", "util", "net", "tls", "url", "dns", "assert", "buffer", "string_decoder"],
-      noExternal: ["@aws-sdk/*"],
     },
   },
   output: "server",
