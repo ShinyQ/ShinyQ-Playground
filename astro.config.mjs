@@ -14,6 +14,7 @@ export default defineConfig({
       alias: import.meta.env.PROD && {
         "@": path.resolve("./src"),
         "react-dom/server": "react-dom/server.edge",
+        "node:os": false,
       },
     },
   },

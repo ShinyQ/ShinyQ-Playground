@@ -2,15 +2,7 @@
 name = "shinyq-playground"
 compatibility_date = "2025-03-25"
 compatibility_flags = [ "nodejs_compat" ]
-main = "./dist/_worker.js/index.js"
-
-[assets]
-binding = "ASSETS"
-directory = "./dist"
+pages_build_output_dir = "./dist"
 
 [observability]
 enabled = true
-
-[[r2_buckets]]
-binding = 'MY_BUCKET'
-bucket_name = 'shinyq'
