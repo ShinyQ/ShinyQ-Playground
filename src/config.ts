@@ -23,7 +23,7 @@ export const config = {
     CLOUDFLARE: {
         KV: {
             ACCOUNT_ID: import.meta.env.CLOUDFLARE_ACCOUNT_ID,
-            API_TOKEN: import.meta.env.CLOUDFLARE_API_TOKEN,
+            API_TOKEN: import.meta.env.CLOUDFLARE_KV_API_TOKEN,
             KV_NAMESPACE_ID: import.meta.env.CLOUDFLARE_KV_NAMESPACE_ID,
             CLOUDFLARE_EMAIL: import.meta.env.CLOUDFLARE_EMAIL,
         },

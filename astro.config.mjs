@@ -17,12 +17,14 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ["@aws-sdk/*", "dotenv"],
+      external: ["dotenv", "crypto", "path", "os", "events", "stream", "util", "net", "tls", "url", "dns", "assert", "buffer", "string_decoder"],
+      noExternal: ["@aws-sdk/*"],
     },
   },
   output: "server",
   adapter: cloudflare({
-    mode: "directory",
-    functionPerRoute: false,
+    platformProxy: {
+      enabled: true,
+    },
   }),
 });

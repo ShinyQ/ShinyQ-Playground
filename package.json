@@ -9,7 +9,8 @@
     "preview": "astro check && astro build && astro preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "preview:cloudflare": "astro check && astro build && wrangler pages dev ./dist"
+    "preview:cloudflare": "astro check && astro build && wrangler pages dev ./dist",
+    "deploy:cloudflare": "npm run build && wrangler pages deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
