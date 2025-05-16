@@ -5,6 +5,7 @@ import Footer from "./Footer.astro";
 import ScatteredIcons from "@/layouts/ScatteredIcons.astro";
 import { cn } from "@/lib/utils";
 import { trackUniqueVisitor } from "@/lib/uniqueVisitor";
+import { colorPalettes } from "@/components/ui/colorPalettes";
 
 interface Props {
   title?: string;
@@ -31,8 +32,63 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta charset="UTF-8" />
+    {/* Prevent theme flash - must be first */}
+    <script define:vars={{ colorPalettes }} is:inline>
+      const palettes = colorPalettes;
+      (function() {
+        // Get theme mode
+        const theme = (() => {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            return localStorage.getItem('theme');
+          }
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+          }
+          return 'light';
+        })();
+        
+        // Get color palette
+        const colorTheme = localStorage.getItem('colorTheme') || 'default';
+        
+        // Apply theme mode
+        document.documentElement.classList.add(theme);
+        document.documentElement.style.colorScheme = theme;
+
+        // Apply color palette
+        const palette = palettes[colorTheme] || palettes.default;
+        const colors = theme === 'dark' ? palette.dark : palette.light;
+
+        Object.entries(colors).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(`--${key}`, value);
+        });
+
+        // Add a class to prevent theme selector flash
+        document.documentElement.classList.add('theme-loaded');
+      })();
+    </script>
+
+    <style is:global>
+      :root {
+        color-scheme: light dark;
+      }
+      :root.dark {
+        color-scheme: dark;
+      }
+      :root:not(.dark) {
+        color-scheme: light;
+      }
+      /* Hide theme selector until theme is loaded */
+      .theme-selector {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+      .theme-loaded .theme-selector {
+        opacity: 1;
+      }
+    </style>
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Kurniadi Ahmad Wijaya" />
@@ -51,7 +107,7 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     <meta name="twitter:image" content={defaultImage} />
 
     {/* Google Analytics */}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0WDF3MR3D"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0WDF3MR3D" is:inline></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -81,6 +137,21 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     />
 
     <title>{fullTitle}</title>
+    <script>
+      // Prevent flash of wrong theme
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          const storedTheme = localStorage.getItem('theme');
+          return storedTheme === 'dark' ? 'dark' : 'light';
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      document.documentElement.classList.add(theme);
+    </script>
+    <script src="/src/scripts/theme.ts"></script>
   </head>
   <body>
     <div class="min-h-screen flex flex-col">
@@ -91,7 +162,6 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
       </main>
       <Footer />
     </div>
-    <script src="/src/scripts/theme.ts"></script>
   </body>
 </html>
 
