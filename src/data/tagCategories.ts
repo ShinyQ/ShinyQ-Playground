@@ -9,8 +9,8 @@ export const tagCategories: TagCategory[] = [
         id: "web",
         name: "Web Development",
         subcategories: [
-            "Frontend", "Backend", "Full Stack", "E-commerce", "Dashboard",
-            "Personal Website"
+            "Frontend", "Backend", "Full Stack", "Dashboard",
+            "Personal Website", "Backend Development"
         ]
     },
     {
@@ -24,10 +24,15 @@ export const tagCategories: TagCategory[] = [
         subcategories: ["Figma", "Adobe XD", "Sketch", "Prototyping", "User Testing", "UX Research"]
     },
     {
+        id: "business",
+        name: "Business & Strategy",
+        subcategories: ["Business Case", "Market Analysis", "Strategy", "Business Development"]
+    },
+    {
         id: "devops",
         name: "DevOps & Infrastructure",
         subcategories: ["Cloud", "CI/CD", "Containerization", "Monitoring"]
-    }
+    },
 ];
 
 export function getSubcategories(categoryId: string): string[] {

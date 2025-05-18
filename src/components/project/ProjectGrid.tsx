@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import GalleryModal from "@/components/project/GalleryModal";
-import { GitBranch, Link as LinkIcon, FileText } from "lucide-react";
+import ProjectDetailsModal from "@/components/project/ProjectDetailsModal";
 import { getSubcategories } from "@/data/tagCategories";
+import { ChevronRight } from "lucide-react";
 
 interface GalleryImage {
   src: string;
@@ -27,191 +26,161 @@ interface ProjectGridProps {
   projects: Project[];
 }
 
+const ITEMS_PER_PAGE = 6;
+
 const ProjectGrid: React.FC<ProjectGridProps> = ({ projects }) => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalImages, setModalImages] = useState<GalleryImage[]>([]);
-  const [modalStartIndex, setModalStartIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const handleTagClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.matches('[data-category]')) {
-        const category = target.getAttribute('data-category');
+      if (target.matches("[data-category]")) {
+        const category = target.getAttribute("data-category");
         if (category) {
           setActiveCategory(category);
+          setCurrentPage(1);
         }
       }
     };
 
-    document.addEventListener('click', handleTagClick);
-    return () => document.removeEventListener('click', handleTagClick);
+    document.addEventListener("click", handleTagClick);
+    return () => document.removeEventListener("click", handleTagClick);
   }, []);
 
   useEffect(() => {
-    const projectCards = document.querySelectorAll('.project-card');
-    const noProjectsMessage = document.getElementById('no-projects');
-    let visibleCount = 0;
-
-    projectCards.forEach((card) => {
-      const tags = (card as HTMLElement).dataset.tags?.split(',') || [];
-      let shouldShow = false;
-
-      if (activeCategory === 'all') {
-        shouldShow = true;
-      } else {
-        const subcategories = getSubcategories(activeCategory);
-        shouldShow = tags.some(tag => subcategories.includes(tag));
-      }
-
-      (card as HTMLElement).style.display = shouldShow ? 'flex' : 'none';
-      if (shouldShow) visibleCount++;
+    const filtered = projects.filter((project) => {
+      if (activeCategory === "all") return true;
+      const subcategories = getSubcategories(activeCategory);
+      return project.tags.some((tag) => subcategories.includes(tag));
     });
 
-    if (noProjectsMessage) {
-      noProjectsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
-    }
+    setFilteredProjects(filtered);
+  }, [projects, activeCategory]);
 
-    // Update active category button styles
-    const categoryButtons = document.querySelectorAll('[data-category]');
-    categoryButtons.forEach((button) => {
-      const category = (button as HTMLElement).getAttribute('data-category');
-      if (category === activeCategory) {
-        button.classList.remove('bg-muted', 'text-foreground/70');
-        button.classList.add('bg-primary', 'text-primary-foreground');
-      } else {
-        button.classList.remove('bg-primary', 'text-primary-foreground');
-        button.classList.add('bg-muted', 'text-foreground/70');
-      }
-    });
-  }, [activeCategory]);
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentProjects = filteredProjects.slice(startIdx, startIdx + ITEMS_PER_PAGE);
 
-  function handleImageClick(images: GalleryImage[], idx: number) {
-    setModalImages(images);
-    setModalStartIndex(idx);
+  const handleViewMore = (project: Project) => {
+    setSelectedProject(project);
     setModalOpen(true);
-  }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <>
-      {projects.map((project) => (
+      <div>
         <div
-          className="project-card flex flex-col h-full bg-card rounded-lg border border-border shadow-lg hover:shadow-xl hover:border-primary transition-all duration-300"
-          data-tags={project.tags.join(",")}
-          key={project.id}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          id="projects-grid"
         >
-          <div className="h-48 overflow-hidden rounded-t-lg">
-            <button
-              onClick={() => handleImageClick(project.gallery, 0)}
-              className="h-48 w-full overflow-hidden cursor-zoom-in focus:outline-none"
-              aria-label={`Open gallery for ${project.title}`}
+          {currentProjects.map((project) => (
+            <div
+              className="project-card flex flex-col h-full bg-card rounded-lg border border-border shadow-lg hover:shadow-xl hover:border-primary transition-all duration-300"
+              data-tags={project.tags.join(",")}
+              key={project.id}
             >
-              <img
-                src={project.coverImage}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-                onError={(e) => {
-                  const img = e.target as HTMLImageElement;
-                  img.src = "/placeholder.svg";
-                  img.classList.add('loaded');
-                }}
-                onLoad={(e) => {
-                  const img = e.target as HTMLImageElement;
-                  img.classList.add('loaded');
-                }}
-              />
-            </button>
-          </div>
-          
-          <div className="p-6 flex flex-col flex-grow">
-            <div className="flex flex-wrap gap-2 mb-3">
-              {project.tags.map((tag: string) => (
-                <span className="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80" key={tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-sm text-foreground/70 mb-4 flex-grow">
-              {project.description}
-            </p>
+              <div className="h-48 overflow-hidden rounded-t-lg flex-shrink-0">
+                <img  
+                  src={project.coverImage}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    img.src = "/placeholder.svg";
+                  }}
+                />
+              </div>
+              <div className="p-6 flex flex-col h-full">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag) => (
+                    <span className="text-xs px-2 py-1 rounded-full bg-muted text-foreground/80" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-            <div className="mb-4">
-              <div className="text-sm font-medium mb-2">Role:</div>
-              <div className="text-foreground/80">{project.role}</div>
-            </div>
+                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                <p className="text-sm text-foreground/70 mb-4 line-clamp-2">
+                  {project.description}
+                </p>
 
-            <div className="mb-5">
-              <div className="text-sm font-medium mb-2">Tech Stack:</div>
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech: string) => (
-                  <span className="text-xs px-2 py-1 rounded-md bg-muted/50 text-foreground/70" key={tech}>
-                    {tech}
-                  </span>
-                ))}
+                <div className="mt-auto">
+                  <button
+                    className="text-primary hover:text-primary/80 transition-colors flex items-center gap-1 text-sm font-medium"
+                    onClick={() => handleViewMore(project)}
+                  >
+                    View More <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
             </div>
+          ))}
 
-            <div className="flex gap-2 mt-auto">
-              {project.githubUrl && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center"
-                >
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center"
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <div id="no-projects" className="text-center py-10 text-foreground/70">
+              No projects found for this category.
+            </div>
+          )}
+        </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-lg border transition disabled:opacity-50 disabled:cursor-not-allowed bg-muted text-foreground/70 hover:bg-accent"
+              >
+                Previous
+              </button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`px-4 py-2 rounded-lg border transition ${
+                      currentPage === i + 1
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-foreground/70 hover:bg-accent"
+                    }`}
                   >
-                    <GitBranch size={16} className="mr-2" /> GitHub
-                  </a>
-                </Button>
-              )}
-              {project.liveUrl && (
-                <Button size="sm" className="flex items-center">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center"
-                  >
-                    <LinkIcon size={16} className="mr-2" /> Live Demo
-                  </a>
-                </Button>
-              )}
-              {project.docUrl && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center"
-                >
-                  <a
-                    href={project.docUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center"
-                  >
-                    <FileText size={16} className="mr-2" /> Docs
-                  </a>
-                </Button>
-              )}
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded-lg border transition disabled:opacity-50 disabled:cursor-not-allowed bg-muted text-foreground/70 hover:bg-accent"
+              >
+                Next
+              </button>
             </div>
           </div>
-        </div>
-      ))}
-      <GalleryModal
-        images={modalImages}
-        open={modalOpen}
-        startIndex={modalStartIndex}
-        onClose={() => setModalOpen(false)}
-      />
-    </>
+        )}
+
+        <ProjectDetailsModal
+          project={selectedProject}
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+        />
+      </div>
   );
 };
 
-export default ProjectGrid; 
+export default ProjectGrid;

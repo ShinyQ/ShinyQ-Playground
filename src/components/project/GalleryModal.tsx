@@ -23,30 +23,51 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ images = [], open, startInd
   }, [open, startIndex, images.length]);
 
   const showPrev = useCallback(() => {
-    if (images.length <= 1) return;
+    if (images.length <= 1) {
+      return;
+    }
+
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
   const showNext = useCallback(() => {
-    if (images.length <= 1) return;
+    if (images.length <= 1) {
+      return;
+    }
+
     setCurrent((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'Escape') {
+        onClose();
+      }
+
+      if (e.key === 'ArrowLeft') {
+        showPrev();
+      }
+
+      if (e.key === 'ArrowRight') {
+        showNext();
+      }
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [open, onClose, showPrev, showNext]);
 
-  if (!open || !images?.length) return null;
+  if (!open || !images?.length) {
+    return null;
+  }
 
   const currentImage = images[current];
-  if (!currentImage) return null;
+  if (!currentImage) {
+    return null;
+  }
 
   return (
     <div
@@ -68,8 +89,8 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ images = [], open, startInd
       </button>
       <div
         className="absolute inset-0 flex flex-col items-center justify-center p-4"
-        onClick={e => e.stopPropagation()}
-        onKeyDown={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
         tabIndex={-1}
       >
         {images.length > 1 && (

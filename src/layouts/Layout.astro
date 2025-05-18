@@ -33,6 +33,7 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {/* Prevent theme flash */}
     <script define:vars={{ colorPalettes }} is:inline>
@@ -68,6 +69,8 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
         document.documentElement.classList.add('theme-loaded');
       })();
     </script>
+    
+    <script src="../scripts/theme.ts"></script>
 
     <style is:global>
       :root {
@@ -89,15 +92,10 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
       }
     </style>
 
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+
     <meta name="description" content={description} />
     <meta name="author" content="Kurniadi Ahmad Wijaya" />
-    <meta
-      name="google-site-verification"
-      content="Cf6K4499XE1AIgP1o-Ij-A1LXl-ItJ2uc803JRlHp_g"
-    />
-
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -106,6 +104,30 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@kurniadiwijaya" />
     <meta name="twitter:image" content={defaultImage} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    {/* Preload critical fonts */}
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      />
+    </noscript>
+
+    {/* Defer non-critical fonts */}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
 
     {/* Google Analytics - Delayed Loading */}
     <script is:inline>
@@ -121,44 +143,6 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
         gtag('config', 'G-T0WDF3MR3D');
       }, 2000);
     </script>
-
-    {/* Preload main Google Fonts for LCP optimization */}
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-      as="style"
-      crossorigin="anonymous"
-    />
-
-    {/* Fonts */}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
-
-    <title>{fullTitle}</title>
-    <script>
-      // Prevent flash of wrong theme
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          const storedTheme = localStorage.getItem('theme');
-          return storedTheme === 'dark' ? 'dark' : 'light';
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      })();
-      document.documentElement.classList.add(theme);
-    </script>
-    <script src="/src/scripts/theme.ts"></script>
   </head>
   <body>
     <div class="min-h-screen flex flex-col">
