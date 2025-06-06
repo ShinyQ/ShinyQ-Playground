@@ -11,12 +11,14 @@ interface Props {
   title?: string;
   description?: string;
   className?: string;
+  image?: string;
 }
 
 const {
   title = "Kurniadi Ahmad Wijaya",
   description = "Backend and Full-stack Developer with expertise in microservices, API integrations, and system optimization",
   className,
+  image,
 } = Astro.props;
 
 const ip = Astro.request.headers.get('x-forwarded-for') || Astro.request.headers.get('x-real-ip') || 'unknown';
@@ -26,7 +28,8 @@ await trackUniqueVisitor(ip, userAgent);
 
 const defaultSite = "Kurniadi Ahmad Wijaya";
 const fullTitle = `${title} - ${defaultSite}`;
-const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
+const defaultImage = "https://i.ibb.co/VqG6XzG/banner.png";
+const metaImage = image || defaultImage;
 ---
 
 <!doctype html>
@@ -99,11 +102,11 @@ const defaultImage = "https://i.ibb.co.com/xSnhjyJG/banner.png";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={defaultImage} />
+    <meta property="og:image" content={metaImage} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@kurniadiwijaya" />
-    <meta name="twitter:image" content={defaultImage} />
+    <meta name="twitter:image" content={metaImage} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     
