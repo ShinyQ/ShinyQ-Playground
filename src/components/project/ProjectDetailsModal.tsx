@@ -200,20 +200,6 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({ project, open
                                     transition={{ delay: 0.8 }}
                                     className="mt-3 flex flex-wrap gap-3"
                                 >
-                                    {project.githubUrl && (
-                                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                            <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                <Button variant="outline" className="flex items-center gap-2">
-                                                    <GitBranch size={16} />
-                                                    GitHub
-                                                </Button>
-                                            </a>
-                                        </motion.div>
-                                    )}
                                     {project.liveUrl && (
                                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                             <a
@@ -224,6 +210,20 @@ const ProjectDetailsModal: React.FC<ProjectDetailsModalProps> = ({ project, open
                                                 <Button className="flex items-center gap-2">
                                                     <ExternalLink size={16} />
                                                     Live Demo
+                                                </Button>
+                                            </a>
+                                        </motion.div>
+                                    )}
+                                    {project.githubUrl && (
+                                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                            <a
+                                                href={project.githubUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                <Button variant="outline" className="flex items-center gap-2">
+                                                    <GitBranch size={16} />
+                                                    GitHub
                                                 </Button>
                                             </a>
                                         </motion.div>
