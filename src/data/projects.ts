@@ -219,5 +219,24 @@ export const projects: Project[] = [
     liveUrl: "https://e-wallet-sentiment-analysisifest-unpad-2021-b7btbs5ga5z2xjk9ha.streamlit.app/",
     docUrl: "https://drive.google.com/file/d/1_fozqVsqwxJpby5TXC4T0Y8Q-Mpieqv3/view?usp=sharing",
     githubUrl: "https://github.com/ShinyQ/CNN-LSTM_Aspect-Based-Sentiment-Analysis-For-Indonesia-Digital-Wallet",
+  },
+  {
+    "id": "crypto-portfolio-tracker",
+    "title": "Crypto Portfolio Tracker",
+    "description": "A cryptocurrency portfolio tracking application built with Next.js and TypeScript. It provides investment monitoring and portfolio performance tracking, integrating with a custom backend API from CoinMarketCap for reliable market data. Features include adaptive UI/UX with dark/light mode and full responsiveness across devices.",
+    "coverImage": "projects/crypto-tracker/cover.png",
+    "tags": ["Web Development", "Backend Development", "API Integration"],
+    "role": "Full Stack Developer",
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Material Tailwind",
+      "Tailwind CSS",
+      "Lucide React",
+      "CoinMarketCap API"
+    ],
+    "liveUrl": "https://coin-tracker-five.vercel.app/porto",
+    "githubUrl": "https://github.com/ShinyQ/NextJS_Crypto-Coin-Porto-Tracker-Frontend",	
+    "gallery": "projects/crypto-tracker"
   }
 ];

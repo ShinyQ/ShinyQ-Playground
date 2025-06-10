@@ -116,7 +116,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ images = [], open, startInd
         <img
           src={currentImage.src}
           alt={currentImage.alt ?? 'Project image'}
-          className="max-w-[90vw] max-h-[80vh] w-auto h-auto rounded-lg shadow-lg border border-border bg-background mx-auto block"
+          className="w-[900px] max-h-[80vh] h-auto rounded-lg shadow-lg border border-border bg-background mx-auto block"
           onError={(e) => {
             const img = e.target as HTMLImageElement;
             img.src = "/placeholder.svg";
